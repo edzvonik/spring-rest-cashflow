@@ -4,6 +4,7 @@ import com.dzvonik.cashflow.entity.enums.TransactionTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,40 +19,54 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", updatable = false, nullable = false)
-    @Getter @Setter
-    int transactionId;
+    @Getter
+    private int transactionId;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Transaction_Category",
+            joinColumns = { @JoinColumn(name = "transaction_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+    )
+    @Getter
+    private List<Category> categories;
 
     @Column(name = "amount")
     @Getter @Setter
-    BigDecimal amount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     @Getter @Setter
-    TransactionTypes type;
-
-    @OneToMany
-    @Column(name = "category_id")
-    @Getter @Setter
-    List<Integer> categoriesId;
+    private TransactionTypes type;
 
     @Column(name = "date")
     @Getter @Setter
-    LocalDate date;
+    private LocalDate date;
 
+    // Какое это отношение?
     @Column(name = "source_account_id")
     @Getter @Setter
-    int sourceAccountId;
+    private Integer sourceAccountId;
 
+    // Какое это отношение?
     @Column(name = "target_account_id")
     @Getter @Setter
-    int targetAccountId;
+    private Integer targetAccountId;
 
-    @Column(name = "contractor")
+    @Column(name = "payer")
     @Getter @Setter
-    String contractor;
+    private String payer;
+
+    @Column(name = "receiver")
+    @Getter @Setter
+    private String receiver;
 
     @Column(name = "comment")
     @Getter @Setter
-    String comment;
+    private String comment;
+
+    public Transaction() {
+        categories = new ArrayList<>();
+    }
 }
