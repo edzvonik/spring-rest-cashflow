@@ -1,4 +1,4 @@
-package com.dzvonik.cashflow.entity;
+package com.dzvonik.cashflow.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.dzvonik.cashflow.entity;
+package com.dzvonik.cashflow.domain.entity;
 
-import com.dzvonik.cashflow.entity.enums.TransactionTypes;
+import com.dzvonik.cashflow.domain.entity.enums.TransactionTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

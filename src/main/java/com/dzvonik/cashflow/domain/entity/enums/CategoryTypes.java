@@ -1,4 +1,4 @@
-package com.dzvonik.cashflow.entity.enums;
+package com.dzvonik.cashflow.domain.entity.enums;
 
 public enum CategoryTypes {
     INCOME,

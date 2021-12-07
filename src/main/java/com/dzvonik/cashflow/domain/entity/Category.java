@@ -1,6 +1,6 @@
-package com.dzvonik.cashflow.entity;
+package com.dzvonik.cashflow.domain.entity;
 
-import com.dzvonik.cashflow.entity.enums.CategoryTypes;
+import com.dzvonik.cashflow.domain.entity.enums.CategoryTypes;
 import lombok.Getter;
 import lombok.Setter;
 
