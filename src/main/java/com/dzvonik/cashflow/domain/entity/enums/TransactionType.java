@@ -1,6 +1,6 @@
 package com.dzvonik.cashflow.domain.entity.enums;
 
-public enum TransactionTypes {
+public enum TransactionType {
     INCOME,
     EXPENSE,
     TRANSFER

@@ -1,6 +1,6 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import com.dzvonik.cashflow.domain.entity.enums.CategoryTypes;
+import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +32,7 @@ public class Category {
     @Enumerated(EnumType.STRING)
     @Column(name = "category_type")
     @Getter @Setter
-    private CategoryTypes type;
+    private CategoryType type;
 
     public Category() {
         transactions = new ArrayList<>();

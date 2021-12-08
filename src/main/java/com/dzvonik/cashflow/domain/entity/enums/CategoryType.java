@@ -1,6 +1,6 @@
 package com.dzvonik.cashflow.domain.entity.enums;
 
-public enum CategoryTypes {
+public enum CategoryType {
     INCOME,
     EXPENSE
 }

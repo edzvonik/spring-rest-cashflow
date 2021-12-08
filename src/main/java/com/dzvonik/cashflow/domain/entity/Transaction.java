@@ -1,6 +1,6 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import com.dzvonik.cashflow.domain.entity.enums.TransactionTypes;
+import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -38,7 +38,7 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     @Getter @Setter
-    private TransactionTypes type;
+    private TransactionType type;
 
     @Column(name = "date")
     @Getter @Setter
