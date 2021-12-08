@@ -24,10 +24,6 @@ public class User {
     @Getter @Setter
     private String email;
 
-    @Column(name = "image_path")
-    @Getter @Setter
-    private String imagePath;
-
     @Column(name = "base_currency")
     private String baseCurrency;
 
