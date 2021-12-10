@@ -11,14 +11,13 @@ import java.util.Currency;
 import java.util.List;
 
 @Entity
+@Getter
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Getter
     private int accountId;
 
-    @Getter @Setter
     private String title;
 
     private String currency;
@@ -31,11 +30,9 @@ public class Account {
         return Currency.getInstance(currency);
     }
 
-    @Getter @Setter
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "account")
-    @Getter
     private List<Transaction> transactions;
 
     public Account() {

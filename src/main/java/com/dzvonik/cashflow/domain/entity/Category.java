@@ -11,27 +11,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Getter
     private Integer categoryId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @Getter @Setter
     private User user;
 
     @ManyToMany(mappedBy = "categories")
-    @Getter
     private List<Transaction> transactions;
 
-    @Getter @Setter
     private String title;
 
     @Enumerated(EnumType.STRING)
-    @Getter @Setter
     private CategoryType type;
 
     public Category() {

@@ -10,17 +10,15 @@ import java.util.ArrayList;
 import java.util.Currency;
 
 @Entity
+@Getter
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Getter
     private String userId;
 
-    @Getter @Setter
     private String name;
 
-    @Getter @Setter
     private String email;
 
     private String baseCurrency;
@@ -33,15 +31,12 @@ public class User {
         return Currency.getInstance(baseCurrency);
     }
 
-    @Getter @Setter
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "user")
-    @Getter
     private ArrayList<Account> accounts;
 
     @OneToMany(mappedBy = "user")
-    @Getter
     private ArrayList<Category> categories;
 
     public User() {
