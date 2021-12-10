@@ -11,7 +11,7 @@ import java.util.Currency;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_id", updatable = false, nullable = false)
     @Getter
     private String userId;

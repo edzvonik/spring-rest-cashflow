@@ -12,7 +12,7 @@ import java.util.List;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "account_id", updatable = false, nullable = false)
     @Getter
     private int accountId;
