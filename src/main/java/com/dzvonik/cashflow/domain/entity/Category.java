@@ -1,14 +1,21 @@
 package com.dzvonik.cashflow.domain.entity;
 
 import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+
+import lombok.Getter;
 
 @Entity
 @Getter
