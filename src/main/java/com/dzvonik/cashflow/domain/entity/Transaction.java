@@ -18,7 +18,6 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", updatable = false, nullable = false)
     @Getter
     private int transactionId;
 
@@ -31,38 +30,30 @@ public class Transaction {
     @Getter
     private List<Category> categories;
 
-    @Column(name = "amount")
     @Getter @Setter
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "transaction_type")
     @Getter @Setter
     private TransactionType type;
 
-    @Column(name = "date")
     @Getter @Setter
     private LocalDate date;
 
     // Какое это отношение?
-    @Column(name = "source_account_id")
     @Getter @Setter
     private Integer sourceAccountId;
 
     // Какое это отношение?
-    @Column(name = "target_account_id")
     @Getter @Setter
     private Integer targetAccountId;
 
-    @Column(name = "payer")
     @Getter @Setter
     private String payer;
 
-    @Column(name = "receiver")
     @Getter @Setter
     private String receiver;
 
-    @Column(name = "comment")
     @Getter @Setter
     private String comment;
 

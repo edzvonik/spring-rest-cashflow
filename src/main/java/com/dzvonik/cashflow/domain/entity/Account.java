@@ -15,15 +15,12 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "account_id", updatable = false, nullable = false)
     @Getter
     private int accountId;
 
-    @Column(name = "title")
     @Getter @Setter
     private String title;
 
-    @Column(name = "currency")
     private String currency;
 
     public void setCurrency(Currency currency) {
@@ -34,7 +31,6 @@ public class Account {
         return Currency.getInstance(currency);
     }
 
-    @Column(name = "balance")
     @Getter @Setter
     private BigDecimal balance;
 

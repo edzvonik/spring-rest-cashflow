@@ -14,19 +14,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user_id", updatable = false, nullable = false)
     @Getter
     private String userId;
 
-    @Column(name = "name")
     @Getter @Setter
     private String name;
 
-    @Column(name = "email")
     @Getter @Setter
     private String email;
 
-    @Column(name = "base_currency")
     private String baseCurrency;
 
     public void setCurrency(Currency currency) {
@@ -37,7 +33,6 @@ public class User {
         return Currency.getInstance(baseCurrency);
     }
 
-    @Column(name = "balance")
     @Getter @Setter
     private BigDecimal balance;
 

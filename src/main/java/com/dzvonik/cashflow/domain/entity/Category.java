@@ -15,7 +15,6 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "category_id", updatable = false, nullable = false)
     @Getter
     private Integer categoryId;
 
@@ -28,12 +27,10 @@ public class Category {
     @Getter
     private List<Transaction> transactions;
 
-    @Column(name = "title")
     @Getter @Setter
     private String title;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "category_type")
     @Getter @Setter
     private CategoryType type;
 
