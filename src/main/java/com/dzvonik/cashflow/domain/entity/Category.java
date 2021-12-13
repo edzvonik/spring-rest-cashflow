@@ -5,7 +5,15 @@ import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 
 import lombok.Builder;
 import lombok.Getter;
