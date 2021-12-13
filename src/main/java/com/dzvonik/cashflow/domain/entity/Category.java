@@ -15,9 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
+@Builder
 @Getter
 public class Category {
 
@@ -36,8 +38,4 @@ public class Category {
 
     @Enumerated(EnumType.STRING)
     private CategoryType type;
-
-    public Category() {
-        transactions = new ArrayList<>();
-    }
 }

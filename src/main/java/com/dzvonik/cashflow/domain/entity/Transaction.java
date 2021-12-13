@@ -18,9 +18,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
+@Builder
 @Getter
 public class Transaction {
 
@@ -54,8 +56,4 @@ public class Transaction {
     private String receiver;
 
     private String comment;
-
-    public Transaction() {
-        categories = new ArrayList<>();
-    }
 }

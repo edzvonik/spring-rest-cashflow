@@ -4,15 +4,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
+@Builder
 @Getter
 public class User {
 
@@ -24,15 +22,8 @@ public class User {
 
     private String email;
 
+    @Enumerated
     private String baseCurrency;
-
-    public void setCurrency(Currency currency) {
-        baseCurrency = currency.getCurrencyCode();
-    }
-
-    public Currency getCurrency() {
-        return Currency.getInstance(baseCurrency);
-    }
 
     private BigDecimal balance;
 
@@ -41,9 +32,4 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private ArrayList<Category> categories;
-
-    public User() {
-        accounts = new ArrayList<>();
-        categories = new ArrayList<>();
-    }
 }

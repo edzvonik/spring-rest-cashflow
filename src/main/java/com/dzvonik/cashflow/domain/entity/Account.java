@@ -11,9 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
+@Builder
 @Getter
 public class Account {
 
@@ -25,20 +27,8 @@ public class Account {
 
     private String currency;
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency.getCurrencyCode();
-    }
-
-    public Currency getCurrency() {
-        return Currency.getInstance(currency);
-    }
-
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
-
-    public Account() {
-        transactions = new ArrayList<>();
-    }
 }
