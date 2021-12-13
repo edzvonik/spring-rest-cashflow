@@ -15,6 +15,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
@@ -30,13 +32,16 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int transactionId;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "Transaction_Category",
-            joinColumns = { @JoinColumn(name = "transaction_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+            name = "TRANSACTION_CATEGORY",
+            joinColumns = @JoinColumn(name = "transaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account account;
 
     private BigDecimal amount;
 

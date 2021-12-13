@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +18,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int accountId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     private String title;
 
