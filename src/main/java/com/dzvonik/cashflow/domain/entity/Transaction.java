@@ -43,17 +43,5 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
-    private LocalDate date;
-
-    // Какое это отношение?
-    private Integer sourceAccountId;
-
-    // Какое это отношение?
-    private Integer targetAccountId;
-
-    private String payer;
-
-    private String receiver;
-
     private String comment;
 }
