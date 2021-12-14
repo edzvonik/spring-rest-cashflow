@@ -15,6 +15,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
@@ -39,6 +40,7 @@ public class Transaction {
     private List<Category> categories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
     private Account account;
 
     private BigDecimal amount;
