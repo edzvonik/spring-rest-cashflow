@@ -2,7 +2,6 @@ package com.dzvonik.cashflow.domain.entity;
 
 import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;

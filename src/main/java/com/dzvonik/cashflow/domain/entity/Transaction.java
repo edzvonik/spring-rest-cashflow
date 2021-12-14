@@ -3,8 +3,6 @@ package com.dzvonik.cashflow.domain.entity;
 import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;

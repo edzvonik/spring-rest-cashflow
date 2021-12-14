@@ -1,8 +1,6 @@
 package com.dzvonik.cashflow.domain.entity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 import javax.persistence.Entity;
