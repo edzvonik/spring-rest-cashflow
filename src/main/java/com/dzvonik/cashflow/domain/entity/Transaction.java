@@ -23,8 +23,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Entity
-@Builder
 @Getter
+@Builder
 public class Transaction {
 
     @Id

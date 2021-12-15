@@ -16,8 +16,8 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Entity
-@Builder
 @Getter
+@Builder
 public class Account {
 
     @Id
