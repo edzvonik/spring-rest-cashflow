@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    drivenClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/cashflow
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: /db/changelog/changelog-master.xml
