@@ -12,17 +12,20 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Getter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int accountId;
+    @EqualsAndHashCode.Include
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -36,4 +39,6 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
+
 }
+

@@ -15,16 +15,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Getter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @EqualsAndHashCode.Include
     private Integer categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,4 +41,6 @@ public class Category {
 
     @Enumerated(EnumType.STRING)
     private CategoryType type;
+
 }
+

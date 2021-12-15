@@ -19,17 +19,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Getter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int transactionId;
+    @EqualsAndHashCode.Include
+    private int id;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -49,4 +52,6 @@ public class Transaction {
     private TransactionType type;
 
     private String comment;
+
 }
+
