@@ -28,11 +28,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @EqualsAndHashCode.Include
-    private Integer categoryId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Integer id;
 
     @ManyToMany(mappedBy = "categories")
     private List<Transaction> transactions;
