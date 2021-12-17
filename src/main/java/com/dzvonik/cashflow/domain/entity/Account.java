@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -27,17 +26,16 @@ public class Account {
     @EqualsAndHashCode.Include
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     private String title;
 
     private String currency;
 
     private BigDecimal balance;
 
-    @OneToMany(mappedBy = "account")
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Category> categories;
+
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Transaction> transactions;
 
 }

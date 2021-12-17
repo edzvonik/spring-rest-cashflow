@@ -8,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 
@@ -30,10 +28,10 @@ public class Category {
     @EqualsAndHashCode.Include
     private Integer id;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Transaction> transactions;
-
     private String title;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Transaction> transactions;
 
     @Enumerated(EnumType.STRING)
     private CategoryType type;

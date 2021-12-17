@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -29,10 +30,10 @@ public class User {
 
     private BigDecimal balance;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Account> accounts;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 
 }

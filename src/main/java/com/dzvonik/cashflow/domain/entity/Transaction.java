@@ -30,10 +30,6 @@ public class Transaction {
     @EqualsAndHashCode.Include
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
