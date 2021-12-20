@@ -1,3 +1,5 @@
+--liquibase formatted sql
+
 create table user (
     id varchar(255) not null,
     balance numeric(19, 2),
