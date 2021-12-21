@@ -32,9 +32,5 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Account> accounts;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Category> categories;
-
 }
 
