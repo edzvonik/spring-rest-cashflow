@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Column;
 
 import lombok.Getter;
 import lombok.Builder;
@@ -18,14 +19,14 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Getter
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = "id")
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @EqualsAndHashCode.Include
     private int id;
 
+    @Column(nullable = false)
     private String title;
 
     private String currency;

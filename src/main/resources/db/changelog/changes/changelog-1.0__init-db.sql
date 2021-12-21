@@ -40,7 +40,7 @@ create table transaction (
     primary key (id)
 );
 
-create table user (
+create table "user" (
     id varchar(255) not null,
     balance numeric(19, 2),
     base_currency varchar(255),
@@ -49,13 +49,13 @@ create table user (
     primary key (id)
 );
 
-create table user_accounts (
-    user_id varchar(255) not null,
+create table "user"_accounts (
+    "user"_id varchar(255) not null,
     accounts_id int4 not null
 );
 
-create table user_categories (
-    user_id varchar(255) not null,
+create table "user"_categories (
+    "user"_id varchar(255) not null,
     categories_id int4 not null
 );
 
@@ -67,12 +67,12 @@ alter table if exists category_transactions
     add constraint uc_category_transactions
     unique (transactions_id);
 
-alter table if exists user_accounts
-    add constraint uc_user_accounts
+alter table if exists "user"_accounts
+    add constraint uc_"user"_accounts
     unique (accounts_id);
 
-alter table if exists user_categories
-    add constraint uc_user_categories
+alter table if exists "user"_categories
+    add constraint uc_"user"_categories
     unique (categories_id);
 
 alter table if exists account_categories
@@ -99,18 +99,18 @@ alter table if exists category_transactions
     add constraint fk_category_transactions_category
     foreign key (category_id) references category;
 
-alter table if exists user_accounts
-    add constraint fk_user_accounts_account
+alter table if exists "user"_accounts
+    add constraint fk_"user"_accounts_account
     foreign key (accounts_id) references account;
 
-alter table if exists user_accounts
-    add constraint fk_user_accounts_user
-    foreign key (user_id) references user;
+alter table if exists "user"_accounts
+    add constraint fk_"user"_accounts_"user"
+    foreign key ("user"_id) references "user";
 
-alter table if exists user_categories
-    add constraint fk_user_categories_category
+alter table if exists "user"_categories
+    add constraint fk_"user"_categories_category
     foreign key (categories_id) references category;
 
-alter table if exists user_categories
-    add constraint fk_user_categories_user
-    foreign key (user_id) references user;
+alter table if exists "user"_categories
+    add constraint fk_"user"_categories_"user"
+    foreign key ("user"_id) references "user";

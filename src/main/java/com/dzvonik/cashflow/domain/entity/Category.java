@@ -20,12 +20,11 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Getter
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = "id")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @EqualsAndHashCode.Include
     private Integer id;
 
     private String title;

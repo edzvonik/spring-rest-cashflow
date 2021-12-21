@@ -22,12 +22,11 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Getter
 @Builder
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = "id")
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @EqualsAndHashCode.Include
     private int id;
 
     private BigDecimal amount;
