@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 
@@ -19,7 +20,8 @@ import lombok.Getter;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "SEQ_USER", allocationSize = 50)
     private String id;
 
     private String name;
@@ -32,5 +34,6 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Account> accounts;
+
 }
 

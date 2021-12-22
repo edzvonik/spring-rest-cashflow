@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.Enumerated;
@@ -24,16 +25,14 @@ import lombok.EqualsAndHashCode;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
+    @SequenceGenerator(name = "category_seq", sequenceName = "SEQ_CATEGORY", allocationSize = 1000)
     private Integer id;
 
     private String title;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Transaction> transactions;
-
-    @Enumerated(EnumType.STRING)
-    private CategoryType type;
 
 }
 
