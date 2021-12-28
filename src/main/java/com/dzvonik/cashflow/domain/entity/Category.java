@@ -1,7 +1,5 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
 
 import lombok.Getter;
 import lombok.Builder;
