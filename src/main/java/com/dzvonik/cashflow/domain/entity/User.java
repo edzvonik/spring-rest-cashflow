@@ -1,6 +1,5 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -42,8 +41,6 @@ public class User {
 
     @Column(nullable = false)
     private String baseCurrency;
-
-    // private BigDecimal balance;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Account> accounts;
