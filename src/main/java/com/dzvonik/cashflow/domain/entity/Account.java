@@ -24,13 +24,14 @@ import lombok.EqualsAndHashCode;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
-    @SequenceGenerator(name = "account_seq", sequenceName = "SEQ_ACCOUNT", allocationSize = 100)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACCOUNT")
+    @SequenceGenerator(name = "SEQ_ACCOUNT", sequenceName = "SEQ_ACCOUNT", allocationSize = 1)
     private int id;
 
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String currency;
 
     private BigDecimal balance;

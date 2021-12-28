@@ -5,6 +5,7 @@ import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -27,17 +28,20 @@ import lombok.EqualsAndHashCode;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_seq")
-    @SequenceGenerator(name = "transaction_seq", sequenceName = "SEQ_TRANSACITON", allocationSize = 1000)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TRANSACITON")
+    @SequenceGenerator(name = "SEQ_TRANSACITON", sequenceName = "SEQ_TRANSACITON", allocationSize = 1)
     private int id;
 
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
+    @Column(nullable = false)
     private Integer categoryId;
 
+    @Column(nullable = false)
     private LocalDate date;
 
     private String comment;

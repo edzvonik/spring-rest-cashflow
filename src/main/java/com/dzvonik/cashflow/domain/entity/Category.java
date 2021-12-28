@@ -4,6 +4,7 @@ import com.dzvonik.cashflow.domain.entity.enums.CategoryType;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -25,10 +26,11 @@ import lombok.EqualsAndHashCode;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
-    @SequenceGenerator(name = "category_seq", sequenceName = "SEQ_CATEGORY", allocationSize = 1000)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CATEGORY")
+    @SequenceGenerator(name = "SEQ_CATEGORY", sequenceName = "SEQ_CATEGORY", allocationSize = 1)
     private Integer id;
 
+    @Column(nullable = false)
     private String title;
 
     @OneToMany(fetch = FetchType.LAZY)
