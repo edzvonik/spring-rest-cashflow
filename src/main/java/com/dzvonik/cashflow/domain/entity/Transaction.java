@@ -32,8 +32,8 @@ import lombok.ToString;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TRANSACITON")
-    @SequenceGenerator(name = "SEQ_TRANSACITON", sequenceName = "SEQ_TRANSACITON", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_transaction")
+    @SequenceGenerator(name = "seq_transaction", sequenceName = "seq_transaction", allocationSize = 1)
     private int id;
 
     @Column(nullable = false)
@@ -42,7 +42,6 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
-    @Column(nullable = false)
     private Integer categoryId;
 
     @Column(nullable = false)

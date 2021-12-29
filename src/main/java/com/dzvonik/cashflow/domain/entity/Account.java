@@ -3,6 +3,7 @@ package com.dzvonik.cashflow.domain.entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -31,8 +32,8 @@ import lombok.ToString;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACCOUNT")
-    @SequenceGenerator(name = "SEQ_ACCOUNT", sequenceName = "SEQ_ACCOUNT", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
+    @SequenceGenerator(name = "seq_account", sequenceName = "seq_account", allocationSize = 1)
     private int id;
 
     @Column(nullable = false)
@@ -46,7 +47,7 @@ public class Account {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Transaction> transactions;
 
 }

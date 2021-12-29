@@ -2,6 +2,7 @@ package com.dzvonik.cashflow.domain.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,8 +30,8 @@ import lombok.ToString;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USER")
-    @SequenceGenerator(name = "SEQ_USER", sequenceName = "SEQ_USER", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
+    @SequenceGenerator(name = "seq_user", sequenceName = "seq_user", allocationSize = 1)
     private int id;
 
     @Column(nullable = false)
@@ -42,7 +43,7 @@ public class User {
     @Column(nullable = false)
     private String baseCurrency;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Account> accounts;
 
 }
