@@ -8,6 +8,11 @@ create table account
     currency varchar(255) not null,
     balance  numeric(19, 2),
     primary key (id)
+    constraint fk_user
+        foreign key (user_id)
+            references user(id)
+            on delete cascade
+            on update cascade
 );
 
 create sequence seq_account;
@@ -58,6 +63,11 @@ create table transaction
     date        date,
     type        varchar(255),
     primary key (id)
+    constraint fk_account
+        foreign key (account_id)
+            references account(id)
+            on delete cascade
+            on update cascade
 );
 
 create sequence seq_transaciton;

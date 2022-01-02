@@ -47,7 +47,7 @@ public class Account {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
 }
