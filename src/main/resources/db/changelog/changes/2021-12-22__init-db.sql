@@ -6,7 +6,7 @@ create table account
     id bigint primary key not null,
     title text not null,
     currency text not null,
-    balance  numeric(19, 2) not null,
+    balance  numeric not null,
     constraint fk_user
         foreign key (user_id)
             references user(id)
@@ -38,7 +38,7 @@ create sequence seq_category;
 create table transaction
 (
     id bigint primary key not null,
-    amount numeric(19, 2) not null,
+    amount numeric not null,
     type text not null,
     date date not null,
     comment text,
