@@ -3,24 +3,22 @@
 --changeset edzvonik:1
 create table account
 (
-    id       int4         not null,
-    title    varchar(255) not null,
-    currency varchar(255) not null,
+    id bigint primary key not null,
+    title text not null,
+    currency text not null,
     balance  numeric(19, 2),
-    primary key (id)
     constraint fk_user
         foreign key (user_id)
             references user(id)
             on delete cascade
-            on update cascade
 );
 
 create sequence seq_account;
 
 create table account_category
 (
-    account_id    int4 not null,
-    category_id int4 not null,
+    account_id bigint not null,
+    category_id bigint not null,
     constraint fk_account
         foreign key (account_id)
             references account,
@@ -31,17 +29,16 @@ create table account_category
 
 create table category
 (
-    id    int4 not null,
-    title varchar(255),
-    primary key (id)
+    id bigint primary key not null,
+    title text,
 );
 
 create sequence seq_category;
 
 create table category_transaction
 (
-    category_id     int4 not null,
-    transaction_id int4 not null,
+    category_id bigint not null,
+    transaction_id bigint not null,
     constraint uc_transactions
         unique (transaction_id),
     constraint uc_category
@@ -56,30 +53,27 @@ create table category_transaction
 
 create table transaction
 (
-    id          int4 not null,
-    amount      numeric(19, 2),
-    category_id int4,
-    comment     varchar(255),
-    date        date,
-    type        varchar(255),
-    primary key (id)
+    id bigint primary key not null,
+    amount numeric(19, 2),
+    category_id bigint,
+    comment text,
+    date date,
+    type text,
     constraint fk_account
         foreign key (account_id)
             references account(id)
             on delete cascade
-            on update cascade
 );
 
 create sequence seq_transaciton;
 
 create table "user"
 (
-    id            int4 not null,
-    balance       numeric(19, 2),
-    base_currency varchar(255),
-    email         varchar(255),
-    name          varchar(255),
-    primary key (id)
+    id bigint primary key not null,
+    balance numeric(19, 2),
+    base_currency text,
+    email text,
+    name text,
 );
 
 create sequence seq_user;
