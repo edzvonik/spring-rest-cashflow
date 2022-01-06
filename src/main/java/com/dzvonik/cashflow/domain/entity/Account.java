@@ -26,9 +26,9 @@ import lombok.ToString;
 @Getter
 @Builder
 @EqualsAndHashCode(of = "id")
-@ToString(of = {"id", "title", "currency", "balance"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id", "title", "currency", "balance"})
 public class Account {
 
     @Id
