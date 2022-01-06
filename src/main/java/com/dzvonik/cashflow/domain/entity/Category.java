@@ -23,10 +23,10 @@ import lombok.ToString;
 @Entity
 @Getter
 @Builder
-@ToString
 @EqualsAndHashCode(of = "id")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id", "title"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category  {
 
     @Id

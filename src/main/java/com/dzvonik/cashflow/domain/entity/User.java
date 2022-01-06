@@ -23,10 +23,10 @@ import lombok.ToString;
 @Entity
 @Getter
 @Builder
-@ToString(of = {"id", "name", "email"})
 @EqualsAndHashCode(of = "id")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id", "name", "email"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id

@@ -25,10 +25,10 @@ import lombok.ToString;
 @Entity
 @Getter
 @Builder
-@ToString
 @EqualsAndHashCode(of = "id")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id", "amount", "type", "date"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Transaction {
 
     @Id
