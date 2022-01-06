@@ -32,7 +32,7 @@ public class Category  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")
     @SequenceGenerator(name = "seq_category", sequenceName = "seq_category")
-    private Integer id;
+    private int id;
 
     @Column(nullable = false)
     private String title;

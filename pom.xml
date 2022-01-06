@@ -59,6 +59,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+			<version>3.8.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
