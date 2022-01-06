@@ -33,7 +33,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
-    @SequenceGenerator(name = "seq_account", sequenceName = "seq_account", allocationSize = 1)
+    @SequenceGenerator(name = "seq_account", sequenceName = "seq_account")
     private int id;
 
     @Column(nullable = false)

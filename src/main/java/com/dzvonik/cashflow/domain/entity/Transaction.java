@@ -33,7 +33,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_transaction")
-    @SequenceGenerator(name = "seq_transaction", sequenceName = "seq_transaction", allocationSize = 1)
+    @SequenceGenerator(name = "seq_transaction", sequenceName = "seq_transaction")
     private int id;
 
     @Column(nullable = false)
