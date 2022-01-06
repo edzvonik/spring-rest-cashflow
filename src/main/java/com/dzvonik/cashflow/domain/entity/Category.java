@@ -37,7 +37,7 @@ public class Category  {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Transaction> transactions;
 
 }
