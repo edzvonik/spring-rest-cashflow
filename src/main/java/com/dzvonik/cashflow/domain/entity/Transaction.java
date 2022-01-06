@@ -40,9 +40,8 @@ public class Transaction {
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TransactionType type;
-
-    private Integer categoryId;
 
     @Column(nullable = false)
     private LocalDate date;

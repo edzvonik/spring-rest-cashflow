@@ -27,7 +27,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Category {
+public class Category  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")

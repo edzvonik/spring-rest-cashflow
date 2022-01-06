@@ -6,7 +6,7 @@ create table account
     id bigint primary key not null,
     title text not null,
     currency text not null,
-    balance  numeric(19, 2),
+    balance  numeric(19, 2) not null,
     constraint fk_user
         foreign key (user_id)
             references user(id)
@@ -30,10 +30,23 @@ create table account_category
 create table category
 (
     id bigint primary key not null,
-    title text,
+    title text not null,
 );
 
 create sequence seq_category;
+
+create table transaction
+(
+    id bigint primary key not null,
+    amount numeric(19, 2) not null,
+    type text not null,
+    date date not null,
+    comment text,
+    constraint fk_account
+        foreign key (account_id)
+            references account(id)
+            on delete cascade
+);
 
 create table category_transaction
 (
@@ -51,29 +64,14 @@ create table category_transaction
             references category(id)
 );
 
-create table transaction
-(
-    id bigint primary key not null,
-    amount numeric(19, 2),
-    category_id bigint,
-    comment text,
-    date date,
-    type text,
-    constraint fk_account
-        foreign key (account_id)
-            references account(id)
-            on delete cascade
-);
-
 create sequence seq_transaciton;
 
 create table "user"
 (
     id bigint primary key not null,
-    balance numeric(19, 2),
-    base_currency text,
-    email text,
-    name text,
+    name text not null,
+    email text not null,
+    base_currency text not null,
 );
 
 create sequence seq_user;

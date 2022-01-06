@@ -23,7 +23,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Builder
-@ToString
+@ToString(of = {"id", "name", "email"})
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
