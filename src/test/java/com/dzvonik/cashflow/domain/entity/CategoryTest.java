@@ -1,40 +1,20 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
 class CategoryTest {
-    private static Category categoryWithData;
-
-    @BeforeAll
-    public static void setUp() {
-        List<Transaction> transactions = List.of();
-
-        categoryWithData = Category.builder()
-                .id(1)
-                .title("Home")
-                .transactions(transactions)
-                .build();
-    }
-
     @Test
-    public void defaultConstructor_WhenObjectIsCreated_ThatNoThrownException() {
+    public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
             Constructor constructor = Category.class.getDeclaredConstructor();
             Category category = (Category)constructor.newInstance();
@@ -45,6 +25,12 @@ class CategoryTest {
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        Category categoryWithData = Category.builder()
+                .id(1)
+                .title("Home")
+                .transactions(List.of())
+                .build();
+
         assertThat(categoryWithData.getId(), equalTo(1));
         assertThat(categoryWithData.getTitle(), equalTo("Home"));
         assertThat(categoryWithData.getTransactions(), equalTo(List.of()));
@@ -52,6 +38,12 @@ class CategoryTest {
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdTitleValues() {
+        Category categoryWithData = Category.builder()
+                .id(1)
+                .title("Home")
+                .transactions(List.of())
+                .build();
+
         assertThat(categoryWithData.toString(), equalTo("Category(id=1, title=Home)"));
     }
 

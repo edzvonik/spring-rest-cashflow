@@ -1,6 +1,5 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,23 +15,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 class AccountTest {
-    private static Account accountWithData;
-
-    @BeforeAll
-    public static void setUp() {
-        List<Category> categoryList = List.of();
-        List<Transaction> transactionList = List.of();
-
-        accountWithData = Account.builder()
-                            .id(1)
-                            .title("Cash")
-                            .currency("USD")
-                            .balance(new BigDecimal("0.01"))
-                            .categories(categoryList)
-                            .transactions(transactionList)
-                            .build();
-    }
-
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
@@ -45,6 +27,15 @@ class AccountTest {
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        Account accountWithData = Account.builder()
+                .id(1)
+                .title("Cash")
+                .currency("USD")
+                .balance(new BigDecimal("0.01"))
+                .categories(List.of())
+                .transactions(List.of())
+                .build();
+
         assertThat(accountWithData.getId(), equalTo(1));
         assertThat(accountWithData.getTitle(),  equalTo("Cash"));
         assertThat(accountWithData.getCurrency(), equalTo("USD"));
@@ -54,6 +45,15 @@ class AccountTest {
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdTitleCurrencyBalanceValues() {
+        Account accountWithData = Account.builder()
+                .id(1)
+                .title("Cash")
+                .currency("USD")
+                .balance(new BigDecimal("0.01"))
+                .categories(List.of())
+                .transactions(List.of())
+                .build();
+
         assertThat(accountWithData.toString(), equalTo("Account(id=1, title=Cash, currency=USD, balance=0.01)"));
     }
 

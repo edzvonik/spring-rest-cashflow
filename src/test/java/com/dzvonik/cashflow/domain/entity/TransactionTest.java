@@ -2,7 +2,6 @@ package com.dzvonik.cashflow.domain.entity;
 
 import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,22 +17,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 class TransactionTest {
-    private static Transaction transactionWithData;
-
-    @BeforeAll
-    public static void setUp() {
-
-        LocalDate transactionDate = LocalDate.of(2022, 1, 6);
-
-        transactionWithData = Transaction.builder()
-                                .id(1)
-                                .amount(new BigDecimal("0.01"))
-                                .type(TransactionType.EXPENSE)
-                                .date(transactionDate)
-                                .comment("Test!")
-                                .build();
-    }
-
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
@@ -46,6 +29,14 @@ class TransactionTest {
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        Transaction transactionWithData = Transaction.builder()
+                .id(1)
+                .amount(new BigDecimal("0.01"))
+                .type(TransactionType.EXPENSE)
+                .date(LocalDate.of(2022, 1, 6))
+                .comment("Test!")
+                .build();
+
         assertThat(transactionWithData.getId(), equalTo(1));
         assertThat(transactionWithData.getAmount().toString(), equalTo("0.01"));
         assertThat(transactionWithData.getType(), equalTo(TransactionType.EXPENSE));
@@ -55,6 +46,14 @@ class TransactionTest {
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdAmountTypeDateValues() {
+        Transaction transactionWithData = Transaction.builder()
+                .id(1)
+                .amount(new BigDecimal("0.01"))
+                .type(TransactionType.EXPENSE)
+                .date(LocalDate.of(2022, 1, 6))
+                .comment("Test!")
+                .build();
+
         assertThat(transactionWithData.toString(), equalTo("Transaction(id=1, amount=0.01, type=EXPENSE, date=2022-01-06)"));
     }
 

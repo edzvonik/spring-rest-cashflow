@@ -2,7 +2,6 @@ package com.dzvonik.cashflow.domain.entity;
 
 import static org.hamcrest.Matchers.equalTo;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,21 +15,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 class UserTest {
-    private static User userWithData;
-
-    @BeforeAll
-    public static void setUp() {
-        List<Account> accountList = List.of();
-
-        userWithData = User.builder()
-                        .id(1)
-                        .name("Test")
-                        .email("test@email.com")
-                        .baseCurrency("USD")
-                        .accounts(accountList)
-                        .build();
-    }
-
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
@@ -43,6 +27,14 @@ class UserTest {
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        User userWithData = User.builder()
+                .id(1)
+                .name("Test")
+                .email("test@email.com")
+                .baseCurrency("USD")
+                .accounts(List.of())
+                .build();
+
         assertThat(userWithData.getId(), equalTo(1));
         assertThat(userWithData.getName(), equalTo("Test"));
         assertThat(userWithData.getEmail(), equalTo("test@email.com"));
@@ -52,6 +44,14 @@ class UserTest {
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
+        User userWithData = User.builder()
+                .id(1)
+                .name("Test")
+                .email("test@email.com")
+                .baseCurrency("USD")
+                .accounts(List.of())
+                .build();
+
         assertThat(userWithData.toString(), equalTo("User(id=1, name=Test, email=test@email.com)"));
     }
 
