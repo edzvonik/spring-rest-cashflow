@@ -13,6 +13,7 @@ import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -36,9 +37,9 @@ class TransactionTest {
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
-            Constructor[] constructors = Transaction.class.getDeclaredConstructors();
-            Transaction transaction = (Transaction) constructors[0].newInstance();
-        } catch (ReflectiveOperationException e) {
+            Constructor constructor = Transaction.class.getDeclaredConstructor();
+            Transaction transaction = (Transaction)constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
         }
     }
@@ -53,7 +54,7 @@ class TransactionTest {
     }
 
     @Test
-    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
+    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdAmountTypeDateValues() {
         assertThat(transactionWithData.toString(), equalTo("Transaction(id=1, amount=0.01, type=EXPENSE, date=2022-01-06)"));
     }
 

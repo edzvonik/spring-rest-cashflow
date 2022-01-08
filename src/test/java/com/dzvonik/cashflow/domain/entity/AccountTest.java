@@ -11,6 +11,7 @@ import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -35,9 +36,9 @@ class AccountTest {
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
-            Constructor[] constructors = Account.class.getDeclaredConstructors();
-            Account account = (Account)constructors[0].newInstance();
-        } catch (ReflectiveOperationException e) {
+            Constructor constructor = Account.class.getDeclaredConstructor();
+            Account account = (Account)constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
         }
     }
@@ -52,7 +53,7 @@ class AccountTest {
     }
 
     @Test
-    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
+    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdTitleCurrencyBalanceValues() {
         assertThat(accountWithData.toString(), equalTo("Account(id=1, title=Cash, currency=USD, balance=0.01)"));
     }
 

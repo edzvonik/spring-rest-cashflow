@@ -12,6 +12,7 @@ import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 class UserTest {
@@ -33,9 +34,9 @@ class UserTest {
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         try {
-            Constructor[] constructors = User.class.getDeclaredConstructors();
-            User user = (User)constructors[0].newInstance();
-        } catch (ReflectiveOperationException e) {
+            Constructor constructor = User.class.getDeclaredConstructor();
+            User user = (User)constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
         }
     }
