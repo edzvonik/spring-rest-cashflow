@@ -1,67 +1,61 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import java.util.ArrayList;
+import java.lang.reflect.Constructor;
+
 import java.util.List;
 
 class UserTest {
-    private User defaultUser;
-    private User userWithData;
+    private static User userWithData;
 
-    @BeforeEach
-    public void setUp() {
-        defaultUser = new User();
-
-        List<Account> testAccounts = new ArrayList();
+    @BeforeAll
+    public static void setUp() {
+        List<Account> accountList = List.of();
 
         userWithData = User.builder()
                         .id(1)
                         .name("Test")
                         .email("test@email.com")
                         .baseCurrency("USD")
-                        .accounts(testAccounts)
+                        .accounts(accountList)
                         .build();
     }
 
     @Test
-    @DisplayName("Test default constructor")
-    public void defaultConstructor_WhenObjectIsCreated_ThatAllFieldsNull() {
-        assertThat(defaultUser.getId(), is(0));
-        assertThat(defaultUser.getName(), nullValue());
-        assertThat(defaultUser.getEmail(), nullValue());
-        assertThat(defaultUser.getBaseCurrency(), nullValue());
-        assertThat(defaultUser.getAccounts(), nullValue());
+    public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+        try {
+            Constructor[] constructors = User.class.getDeclaredConstructors();
+            User user = (User)constructors[0].newInstance();
+        } catch (ReflectiveOperationException e) {
+            assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
+        }
     }
 
     @Test
-    @DisplayName("Test builders")
-    public void builders_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
-        assertThat(userWithData.getId(), is(1));
-        assertThat(userWithData.getName(), is("Test"));
-        assertThat(userWithData.getEmail(), is("test@email.com"));
-        assertThat(userWithData.getBaseCurrency(), is("USD"));
-        assertThat(userWithData.getAccounts(), notNullValue());
+    public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        assertThat(userWithData.getId(), equalTo(1));
+        assertThat(userWithData.getName(), equalTo("Test"));
+        assertThat(userWithData.getEmail(), equalTo("test@email.com"));
+        assertThat(userWithData.getBaseCurrency(), equalTo("USD"));
+        assertThat(userWithData.getAccounts(), equalTo(List.of()));
     }
 
     @Test
-    @DisplayName("Test toString()")
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
-        assertThat(userWithData.toString(), is("User(id=1, name=Test, email=test@email.com)"));
+        assertThat(userWithData.toString(), equalTo("User(id=1, name=Test, email=test@email.com)"));
     }
 
     @Test
-    @DisplayName("Test equals() and hashCode()")
     public void equalsAndHashCode() {
         EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
     }
