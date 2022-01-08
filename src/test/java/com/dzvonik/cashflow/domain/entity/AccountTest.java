@@ -1,72 +1,64 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.equalTo;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
+import java.lang.reflect.Constructor;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 class AccountTest {
-    private Account defaultAccount;
-    private Account accountWithData;
+    private static Account accountWithData;
 
-    @BeforeEach
-    public void setUp() {
-        defaultAccount = new Account();
-
-        List<Category> categories = new ArrayList();
-        List<Transaction> transactions = new ArrayList();
+    @BeforeAll
+    public static void setUp() {
+        List<Category> categoryList = List.of();
+        List<Transaction> transactionList = List.of();
 
         accountWithData = Account.builder()
                             .id(1)
                             .title("Cash")
                             .currency("USD")
                             .balance(new BigDecimal("0.01"))
-                            .categories(categories)
-                            .transactions(transactions)
+                            .categories(categoryList)
+                            .transactions(transactionList)
                             .build();
     }
 
     @Test
-    @DisplayName("Test default constructor")
-    public void defaultConstructor_WhenObjectIsCreated_ThatAllFieldsNull() {
-        assertThat(defaultAccount.getId(), is(0));
-        assertThat(defaultAccount.getTitle(), nullValue());
-        assertThat(defaultAccount.getCurrency(), nullValue());
-        assertThat(defaultAccount.getCategories(), nullValue());
-        assertThat(defaultAccount.getTransactions(), nullValue());
+    public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+        try {
+            Constructor[] constructors = Account.class.getDeclaredConstructors();
+            Account account = (Account)constructors[0].newInstance();
+        } catch (ReflectiveOperationException e) {
+            assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
+        }
     }
 
     @Test
-    @DisplayName("Test builders")
-    public void builders_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
-        assertThat(accountWithData.getId(), is(1));
-        assertThat(accountWithData.getTitle(), is("Cash"));
-        assertThat(accountWithData.getCurrency(), is("USD"));
-        assertThat(accountWithData.getCategories(), notNullValue());
-        assertThat(accountWithData.getTransactions(), notNullValue());
+    public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+        assertThat(accountWithData.getId(), equalTo(1));
+        assertThat(accountWithData.getTitle(),  equalTo("Cash"));
+        assertThat(accountWithData.getCurrency(), equalTo("USD"));
+        assertThat(accountWithData.getCategories(), equalTo(List.of()));
+        assertThat(accountWithData.getTransactions(), equalTo(List.of()));
     }
 
     @Test
-    @DisplayName("Test toString()")
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
-        assertThat(accountWithData.toString(), is("Account(id=1, title=Cash, currency=USD, balance=0.01)"));
+        assertThat(accountWithData.toString(), equalTo("Account(id=1, title=Cash, currency=USD, balance=0.01)"));
     }
 
     @Test
-    @DisplayName("Test equals() and hashCode()")
     public void equalsAndHashCode() {
-        EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(Account.class).suppress(Warning.SURROGATE_KEY).verify();
     }
 
 }
