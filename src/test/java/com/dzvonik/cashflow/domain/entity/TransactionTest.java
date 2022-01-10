@@ -4,57 +4,55 @@ import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 class TransactionTest {
+
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
-        try {
+        assertThatCode(() -> {
             Constructor constructor = Transaction.class.getDeclaredConstructor();
             Transaction transaction = (Transaction)constructor.newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
-        }
+        }).doesNotThrowAnyException();
     }
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
         Transaction transactionWithData = Transaction.builder()
-                .id(1)
-                .amount(new BigDecimal("0.01"))
+                .id(7)
+                .amount(new BigDecimal("1023.56"))
                 .type(TransactionType.EXPENSE)
                 .date(LocalDate.of(2022, 1, 6))
                 .comment("Test!")
                 .build();
 
-        assertThat(transactionWithData.getId(), equalTo(1));
-        assertThat(transactionWithData.getAmount().toString(), equalTo("0.01"));
-        assertThat(transactionWithData.getType(), equalTo(TransactionType.EXPENSE));
-        assertThat(transactionWithData.getDate().toString(), equalTo("2022-01-06"));
-        assertThat(transactionWithData.getComment(), equalTo("Test!"));
+        assertThat(transactionWithData.getId()).isEqualTo(7);
+        assertThat(transactionWithData.getAmount()).isEqualTo("1023.56");
+        assertThat(transactionWithData.getType()).isEqualTo(TransactionType.EXPENSE);
+        assertThat(transactionWithData.getDate()).isEqualTo("2022-01-06");
+        assertThat(transactionWithData.getComment()).isEqualTo("Test!");
     }
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdAmountTypeDateValues() {
         Transaction transactionWithData = Transaction.builder()
-                .id(1)
-                .amount(new BigDecimal("0.01"))
-                .type(TransactionType.EXPENSE)
-                .date(LocalDate.of(2022, 1, 6))
-                .comment("Test!")
+                .id(0)
+                .amount(new BigDecimal("555963.12"))
+                .type(TransactionType.INCOME)
+                .date(LocalDate.of(2022, 12, 5))
+                .comment("Salary!")
                 .build();
 
-        assertThat(transactionWithData.toString(), equalTo("Transaction(id=1, amount=0.01, type=EXPENSE, date=2022-01-06)"));
+        assertThat(transactionWithData.toString()).isEqualTo("Transaction(id=0, amount=555963.12, type=INCOME, date=2022-12-05)");
     }
 
     @Test

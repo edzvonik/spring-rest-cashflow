@@ -2,33 +2,31 @@ package com.dzvonik.cashflow.domain.entity;
 
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import java.lang.reflect.Constructor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.List;
 
 class AccountTest {
+
     @Test
     public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
-        try {
+        assertThatCode(() -> {
             Constructor constructor = Account.class.getDeclaredConstructor();
             Account account = (Account)constructor.newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            assertThat(e.getClass(), equalTo(ReflectiveOperationException.class));
-        }
+        }).doesNotThrowAnyException();
     }
 
     @Test
     public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
         Account accountWithData = Account.builder()
-                .id(1)
+                .id(5)
                 .title("Cash")
                 .currency("USD")
                 .balance(new BigDecimal("0.01"))
@@ -36,25 +34,26 @@ class AccountTest {
                 .transactions(List.of())
                 .build();
 
-        assertThat(accountWithData.getId(), equalTo(1));
-        assertThat(accountWithData.getTitle(),  equalTo("Cash"));
-        assertThat(accountWithData.getCurrency(), equalTo("USD"));
-        assertThat(accountWithData.getCategories(), equalTo(List.of()));
-        assertThat(accountWithData.getTransactions(), equalTo(List.of()));
+        assertThat(accountWithData.getId()).isEqualTo(5);
+        assertThat(accountWithData.getTitle()).isEqualTo("Cash");
+        assertThat(accountWithData.getCurrency()).isEqualTo("USD");
+        assertThat(accountWithData.getBalance()).isEqualTo("0.01");
+        assertThat(accountWithData.getCategories()).isEqualTo(List.of());
+        assertThat(accountWithData.getTransactions()).isEqualTo(List.of());
     }
 
     @Test
     public void toString_WhenCallToStringMethod_ThatReturnStringWithIdTitleCurrencyBalanceValues() {
         Account accountWithData = Account.builder()
-                .id(1)
-                .title("Cash")
-                .currency("USD")
-                .balance(new BigDecimal("0.01"))
+                .id(0)
+                .title("Card")
+                .currency("RUB")
+                .balance(new BigDecimal("0.00"))
                 .categories(List.of())
                 .transactions(List.of())
                 .build();
 
-        assertThat(accountWithData.toString(), equalTo("Account(id=1, title=Cash, currency=USD, balance=0.01)"));
+        assertThat(accountWithData.toString()).isEqualTo("Account(id=0, title=Card, currency=RUB, balance=0.00)");
     }
 
     @Test
