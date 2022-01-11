@@ -50,7 +50,7 @@ class UserTest {
     }
 
     @Test
-    void toString_WhenCallToStringMethod_ThatReturnStringWithIdNameEmailValues() {
+    void toString_WhenCallMethod_ThatReturnIdNameEmailValues() {
         User userWithData = User.builder()
                 .id(0)
                 .name("Test2")
