@@ -10,29 +10,20 @@ import nl.jqno.equalsverifier.Warning;
 
 import org.mockito.Mockito;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
 class CategoryTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
         assertThatCode(() -> {
-            Constructor constructor = Category.class.getDeclaredConstructor();
-            Category category = (Category)constructor.newInstance();
+            Category category = Category.class.getDeclaredConstructor().newInstance();
         }).doesNotThrowAnyException();
-    }
-
-    private List<Transaction> getTransactions() {
-        Transaction transaction1 = Mockito.mock(Transaction.class);
-        Transaction transaction2 = Mockito.mock(Transaction.class);
-
-        return List.of(transaction1, transaction2);
     }
 
     @Test
     void builder_WhenSetValues_ThatReturnValues() {
-        List<Transaction> transactions = getTransactions();
+        List<Transaction> transactions = mockTransactions();
 
         Category categoryWithData = Category.builder()
                 .id(3)
@@ -57,7 +48,16 @@ class CategoryTest {
 
     @Test
     void equalsAndHashCode() {
-        EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(User.class)
+                .suppress(Warning.SURROGATE_KEY)
+                .verify();
+    }
+
+    private List<Transaction> mockTransactions() {
+        Transaction transaction1 = Mockito.mock(Transaction.class);
+        Transaction transaction2 = Mockito.mock(Transaction.class);
+
+        return List.of(transaction1, transaction2);
     }
 
 }

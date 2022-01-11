@@ -18,10 +18,9 @@ import java.time.LocalDate;
 class TransactionTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
         assertThatCode(() -> {
-            Constructor constructor = Transaction.class.getDeclaredConstructor();
-            Transaction transaction = (Transaction)constructor.newInstance();
+            Transaction transaction = Transaction.class.getDeclaredConstructor().newInstance();
         }).doesNotThrowAnyException();
     }
 
@@ -56,7 +55,9 @@ class TransactionTest {
 
     @Test
     void equalsAndHashCode() {
-        EqualsVerifier.forClass(Transaction.class).suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(Transaction.class)
+                .suppress(Warning.SURROGATE_KEY)
+                .verify();
     }
 
 }

@@ -10,30 +10,20 @@ import nl.jqno.equalsverifier.Warning;
 
 import org.mockito.Mockito;
 
-import java.lang.reflect.Constructor;
-
 import java.util.List;
 
 class UserTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
         assertThatCode(() -> {
-            Constructor constructor = User.class.getDeclaredConstructor();
-            User user = (User)constructor.newInstance();
+            User user = User.class.getDeclaredConstructor().newInstance();
         }).doesNotThrowAnyException();
-    }
-
-    private List<Account> getAccounts() {
-        Account account1 = Mockito.mock(Account.class);
-        Account account2 = Mockito.mock(Account.class);
-
-        return List.of(account1, account2);
     }
 
     @Test
     void builder_WhenSetValues_ThatReturnValues() {
-        List<Account> accounts = getAccounts();
+        List<Account> accounts = mockAccounts();
 
         User userWithData = User.builder()
                 .id(1)
@@ -64,7 +54,16 @@ class UserTest {
 
     @Test
     void equalsAndHashCode() {
-        EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(User.class)
+                .suppress(Warning.SURROGATE_KEY)
+                .verify();
+    }
+
+    private List<Account> mockAccounts() {
+        Account account1 = Mockito.mock(Account.class);
+        Account account2 = Mockito.mock(Account.class);
+
+        return List.of(account1, account2);
     }
 
 }

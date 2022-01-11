@@ -10,39 +10,22 @@ import nl.jqno.equalsverifier.Warning;
 
 import org.mockito.Mockito;
 
-import java.lang.reflect.Constructor;
-
 import java.math.BigDecimal;
 import java.util.List;
 
 class AccountTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
         assertThatCode(() -> {
-            Constructor constructor = Account.class.getDeclaredConstructor();
-            Account account = (Account)constructor.newInstance();
+            Account account = Account.class.getDeclaredConstructor().newInstance();
         }).doesNotThrowAnyException();
-    }
-
-    private List<Transaction> getTransactions() {
-        Transaction transaction1 = Mockito.mock(Transaction.class);
-        Transaction transaction2 = Mockito.mock(Transaction.class);
-
-        return List.of(transaction1, transaction2);
-    }
-
-    private List<Category> getCategories() {
-        Category category1 = Mockito.mock(Category.class);
-        Category category2 = Mockito.mock(Category.class);
-
-        return List.of(category1, category2);
     }
 
     @Test
     void builder_WhenSetValues_ThatReturnValues() {
-        List<Transaction> transactions = getTransactions();
-        List<Category> categories = getCategories();
+        List<Transaction> transactions = mock(Transaction.class);
+        List<Category> categories = mock(Category.class);
 
         Account accountWithData = Account.builder()
                 .id(5)
@@ -75,7 +58,16 @@ class AccountTest {
 
     @Test
     void equalsAndHashCode() {
-        EqualsVerifier.forClass(Account.class).suppress(Warning.SURROGATE_KEY).verify();
+        EqualsVerifier.forClass(Account.class)
+                .suppress(Warning.SURROGATE_KEY)
+                .verify();
+    }
+
+    private <T> List<T> mock(Class c) {
+        Object mock1 = Mockito.mock(c);
+        Object mock2 = Mockito.mock(c);
+
+        return (List<T>) List.of(mock1, mock2);
     }
 
 }
