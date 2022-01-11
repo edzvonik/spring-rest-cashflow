@@ -18,7 +18,7 @@ import java.time.LocalDate;
 class TransactionTest {
 
     @Test
-    public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         assertThatCode(() -> {
             Constructor constructor = Transaction.class.getDeclaredConstructor();
             Transaction transaction = (Transaction)constructor.newInstance();
@@ -26,7 +26,7 @@ class TransactionTest {
     }
 
     @Test
-    public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+    void builder_WhenSetValues_ThatReturnValues() {
         Transaction transactionWithData = Transaction.builder()
                 .id(7)
                 .amount(new BigDecimal("1023.56"))
@@ -43,20 +43,19 @@ class TransactionTest {
     }
 
     @Test
-    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdAmountTypeDateValues() {
+    void toString_WhenCallMethod_ThatReturnIdAmountTypeDateValues() {
         Transaction transactionWithData = Transaction.builder()
                 .id(0)
                 .amount(new BigDecimal("555963.12"))
                 .type(TransactionType.INCOME)
                 .date(LocalDate.of(2022, 12, 5))
-                .comment("Salary!")
                 .build();
 
         assertThat(transactionWithData.toString()).isEqualTo("Transaction(id=0, amount=555963.12, type=INCOME, date=2022-12-05)");
     }
 
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         EqualsVerifier.forClass(Transaction.class).suppress(Warning.SURROGATE_KEY).verify();
     }
 

@@ -8,45 +8,55 @@ import static org.assertj.core.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
+import org.mockito.Mockito;
+
 import java.lang.reflect.Constructor;
 import java.util.List;
 
 class CategoryTest {
 
     @Test
-    public void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
+    void defaultConstructor_WhenObjectCreated_ThatNoThrownException() {
         assertThatCode(() -> {
             Constructor constructor = Category.class.getDeclaredConstructor();
             Category category = (Category)constructor.newInstance();
         }).doesNotThrowAnyException();
     }
 
+    private List<Transaction> getTransactions() {
+        Transaction transaction1 = Mockito.mock(Transaction.class);
+        Transaction transaction2 = Mockito.mock(Transaction.class);
+
+        return List.of(transaction1, transaction2);
+    }
+
     @Test
-    public void builder_WhenValueSetViaBuilderMethod_ThatFieldShouldReturnThisValue() {
+    void builder_WhenSetValues_ThatReturnValues() {
+        List<Transaction> transactions = getTransactions();
+
         Category categoryWithData = Category.builder()
                 .id(3)
                 .title("Home")
-                .transactions(List.of())
+                .transactions(transactions)
                 .build();
 
         assertThat(categoryWithData.getId()).isEqualTo(3);
         assertThat(categoryWithData.getTitle()).isEqualTo("Home");
-        assertThat(categoryWithData.getTransactions()).isEqualTo(List.of());
+        assertThat(categoryWithData.getTransactions()).containsExactlyInAnyOrderElementsOf(transactions);
     }
 
     @Test
-    public void toString_WhenCallToStringMethod_ThatReturnStringWithIdTitleValues() {
+    void toString_WhenCallMethod_ThatReturnIdTitleValues() {
         Category categoryWithData = Category.builder()
                 .id(0)
                 .title("Home")
-                .transactions(List.of())
                 .build();
 
         assertThat(categoryWithData.toString()).isEqualTo("Category(id=0, title=Home)");
     }
 
     @Test
-    public void equalsAndHashCode() {
+    void equalsAndHashCode() {
         EqualsVerifier.forClass(User.class).suppress(Warning.SURROGATE_KEY).verify();
     }
 
