@@ -69,10 +69,7 @@ class AccountTest {
     }
 
     private <T> List<T> mock(Class<T> c) {
-        Object mock1 = Mockito.mock(c);
-        Object mock2 = Mockito.mock(c);
-
-        return List.of(c.cast(mock1), c.cast(mock2));
+        return List.of(Mockito.mock(c));
     }
 
 }
