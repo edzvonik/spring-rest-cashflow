@@ -16,7 +16,7 @@ import java.util.List;
 class AccountTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
         assertThatCode(() -> Account.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }

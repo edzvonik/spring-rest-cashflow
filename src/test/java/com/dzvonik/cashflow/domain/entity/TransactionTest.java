@@ -18,7 +18,7 @@ import java.time.LocalDate;
 class TransactionTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
         assertThatCode(() -> Transaction.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }
