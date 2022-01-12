@@ -29,8 +29,8 @@ import lombok.ToString;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")
     @SequenceGenerator(name = "seq_category", sequenceName = "seq_category")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")
     private int id;
 
     @Column(nullable = false)

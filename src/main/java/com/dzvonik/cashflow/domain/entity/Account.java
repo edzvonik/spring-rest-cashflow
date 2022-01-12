@@ -32,8 +32,8 @@ import lombok.ToString;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
     @SequenceGenerator(name = "seq_account", sequenceName = "seq_account")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
     private int id;
 
     @Column(nullable = false)

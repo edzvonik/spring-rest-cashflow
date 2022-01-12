@@ -8,21 +8,20 @@ import org.junit.jupiter.api.Test;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
 
 import java.util.List;
 
 class UserTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
-        assertThatCode(() -> {
-            User user = User.class.getDeclaredConstructor().newInstance();
-        }).doesNotThrowAnyException();
+    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+        assertThatCode(() -> User.class.getDeclaredConstructor().newInstance())
+                .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThatReturnValues() {
+    void builder_WhenSetValues_ThanReturnValues() {
         List<Account> accounts = mockAccounts();
         User userWithData = User.builder()
                 .id(1)
@@ -40,7 +39,7 @@ class UserTest {
     }
 
     @Test
-    void toString_WhenCallMethod_ThatReturnIdNameEmailValues() {
+    void toString_WhenCall_ThanReturnStringRepresentation() {
         User userWithData = User.builder()
                 .id(0)
                 .name("Test2")
@@ -63,8 +62,8 @@ class UserTest {
     }
 
     private List<Account> mockAccounts() {
-        Account account1 = Mockito.mock(Account.class);
-        Account account2 = Mockito.mock(Account.class);
+        Account account1 = mock(Account.class);
+        Account account2 = mock(Account.class);
 
         return List.of(account1, account2);
     }

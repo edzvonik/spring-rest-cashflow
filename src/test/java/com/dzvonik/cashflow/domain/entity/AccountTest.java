@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,16 +16,15 @@ import java.util.List;
 class AccountTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
-        assertThatCode(() -> {
-            Account account = Account.class.getDeclaredConstructor().newInstance();
-        }).doesNotThrowAnyException();
+    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+        assertThatCode(() -> Account.class.getDeclaredConstructor().newInstance())
+                .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThatReturnValues() {
-        List<Transaction> transactions = mock(Transaction.class);
-        List<Category> categories = mock(Category.class);
+    void builder_WhenSetValues_ThanReturnValues() {
+        List<Transaction> transactions = getMock(Transaction.class);
+        List<Category> categories = getMock(Category.class);
 
         Account accountWithData = Account.builder()
                 .id(5)
@@ -39,13 +38,13 @@ class AccountTest {
         assertThat(accountWithData.getId()).isEqualTo(5);
         assertThat(accountWithData.getTitle()).isEqualTo("Cash");
         assertThat(accountWithData.getCurrency()).isEqualTo("USD");
-        assertThat(accountWithData.getBalance()).isEqualTo("0.01");
+        assertThat(accountWithData.getBalance()).isEqualTo(new BigDecimal("0.01"));
         assertThat(accountWithData.getCategories()).containsExactlyInAnyOrderElementsOf(categories);
         assertThat(accountWithData.getTransactions()).containsExactlyInAnyOrderElementsOf(transactions);
     }
 
     @Test
-    void toString_WhenCallMethod_ThatReturnIdTitleCurrencyBalanceValues() {
+    void toString_WhenCall_ThanReturnStringRepresentation() {
         Account accountWithData = Account.builder()
                 .id(0)
                 .title("Card")
@@ -68,8 +67,8 @@ class AccountTest {
                 .verify();
     }
 
-    private <T> List<T> mock(Class<T> c) {
-        return List.of(Mockito.mock(c));
+    private <T> List<T> getMock(Class<T> c) {
+        return List.of(mock(c));
     }
 
 }

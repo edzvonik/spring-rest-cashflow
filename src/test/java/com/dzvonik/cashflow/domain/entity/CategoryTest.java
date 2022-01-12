@@ -15,14 +15,13 @@ import java.util.List;
 class CategoryTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
-        assertThatCode(() -> {
-            Category category = Category.class.getDeclaredConstructor().newInstance();
-        }).doesNotThrowAnyException();
+    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+        assertThatCode(() -> Category.class.getDeclaredConstructor().newInstance())
+                .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThatReturnValues() {
+    void builder_WhenSetValues_ThanReturnValues() {
         List<Transaction> transactions = mockTransactions();
         Category categoryWithData = new Category(3, "Home", transactions);
 
@@ -32,7 +31,7 @@ class CategoryTest {
     }
 
     @Test
-    void toString_WhenCallMethod_ThatReturnIdTitleValues() {
+    void toString_WhenCall_ThanReturnStringRepresentation() {
         Category categoryWithData = new Category(0, "Home", mockTransactions());
 
         assertThat(categoryWithData.toString()).contains(

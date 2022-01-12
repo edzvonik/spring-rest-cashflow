@@ -18,14 +18,13 @@ import java.time.LocalDate;
 class TransactionTest {
 
     @Test
-    void defaultConstructor_WhenObjectCreated_ThatNoExceptionThrown() {
-        assertThatCode(() -> {
-            Transaction transaction = Transaction.class.getDeclaredConstructor().newInstance();
-        }).doesNotThrowAnyException();
+    void defaultConstructor_WhenObjectCreated_ThanNoExceptionThrown() {
+        assertThatCode(() -> Transaction.class.getDeclaredConstructor().newInstance())
+                .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThatReturnValues() {
+    void builder_WhenSetValues_ThanReturnValues() {
         Transaction transactionWithData = Transaction.builder()
                 .id(7)
                 .amount(new BigDecimal("1023.56"))
@@ -35,14 +34,14 @@ class TransactionTest {
                 .build();
 
         assertThat(transactionWithData.getId()).isEqualTo(7);
-        assertThat(transactionWithData.getAmount()).isEqualTo("1023.56");
+        assertThat(transactionWithData.getAmount()).isEqualTo(new BigDecimal("1023.56"));
         assertThat(transactionWithData.getType()).isEqualTo(TransactionType.EXPENSE);
-        assertThat(transactionWithData.getDate()).isEqualTo("2022-01-06");
+        assertThat(transactionWithData.getDate()).isEqualTo(LocalDate.of(2022, 1, 6));
         assertThat(transactionWithData.getComment()).isEqualTo("Test!");
     }
 
     @Test
-    void toString_WhenCallMethod_ThatReturnIdAmountTypeDateValues() {
+    void toString_WhenCall_ThanReturnStringRepresentation() {
         Transaction transactionWithData = Transaction.builder()
                 .id(0)
                 .amount(new BigDecimal("555963.12"))
