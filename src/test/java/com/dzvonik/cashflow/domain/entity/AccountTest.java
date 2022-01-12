@@ -8,8 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import static org.mockito.Mockito.mock;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,8 +21,8 @@ class AccountTest {
 
     @Test
     void builder_WhenSetValues_ThanReturnValues() {
-        List<Transaction> transactions = getMock(Transaction.class);
-        List<Category> categories = getMock(Category.class);
+        List<Transaction> transactions = mock(Transaction.class);
+        List<Category> categories = mock(Category.class);
 
         Account accountWithData = Account.builder()
                 .id(5)
@@ -67,8 +65,8 @@ class AccountTest {
                 .verify();
     }
 
-    private <T> List<T> getMock(Class<T> c) {
-        return List.of(mock(c));
+    private <T> List<T> mock(Class<T> c) {
+        return List.of(org.mockito.Mockito.mock(c));
     }
 
 }

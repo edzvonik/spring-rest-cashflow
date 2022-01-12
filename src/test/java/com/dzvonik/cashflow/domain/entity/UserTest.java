@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import static org.mockito.Mockito.mock;
-
 import java.util.List;
 
 class UserTest {
@@ -22,7 +20,7 @@ class UserTest {
 
     @Test
     void builder_WhenSetValues_ThanReturnValues() {
-        List<Account> accounts = mockAccounts();
+        List<Account> accounts = mock();
         User userWithData = User.builder()
                 .id(1)
                 .name("Test1")
@@ -61,11 +59,8 @@ class UserTest {
                 .verify();
     }
 
-    private List<Account> mockAccounts() {
-        Account account1 = mock(Account.class);
-        Account account2 = mock(Account.class);
-
-        return List.of(account1, account2);
+    private List<Account> mock() {
+        return List.of(org.mockito.Mockito.mock(Account.class));
     }
 
 }

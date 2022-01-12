@@ -10,8 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import java.lang.reflect.Constructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

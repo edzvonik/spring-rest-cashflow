@@ -8,8 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
-import org.mockito.Mockito;
-
 import java.util.List;
 
 class CategoryTest {
@@ -22,7 +20,7 @@ class CategoryTest {
 
     @Test
     void builder_WhenSetValues_ThanReturnValues() {
-        List<Transaction> transactions = mockTransactions();
+        List<Transaction> transactions = mock();
         Category categoryWithData = new Category(3, "Home", transactions);
 
         assertThat(categoryWithData.getId()).isEqualTo(3);
@@ -32,7 +30,7 @@ class CategoryTest {
 
     @Test
     void toString_WhenCall_ThanReturnStringRepresentation() {
-        Category categoryWithData = new Category(0, "Home", mockTransactions());
+        Category categoryWithData = new Category(0, "Home", mock());
 
         assertThat(categoryWithData.toString()).contains(
             "id=0",
@@ -47,11 +45,8 @@ class CategoryTest {
                 .verify();
     }
 
-    private List<Transaction> mockTransactions() {
-        Transaction transaction1 = Mockito.mock(Transaction.class);
-        Transaction transaction2 = Mockito.mock(Transaction.class);
-
-        return List.of(transaction1, transaction2);
+    private List<Transaction> mock() {
+        return List.of(org.mockito.Mockito.mock(Transaction.class));
     }
 
 }
