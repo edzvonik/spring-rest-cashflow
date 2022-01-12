@@ -24,12 +24,7 @@ class CategoryTest {
     @Test
     void builder_WhenSetValues_ThatReturnValues() {
         List<Transaction> transactions = mockTransactions();
-
-        Category categoryWithData = Category.builder()
-                .id(3)
-                .title("Home")
-                .transactions(transactions)
-                .build();
+        Category categoryWithData = new Category(3, "Home", transactions);
 
         assertThat(categoryWithData.getId()).isEqualTo(3);
         assertThat(categoryWithData.getTitle()).isEqualTo("Home");
@@ -38,12 +33,12 @@ class CategoryTest {
 
     @Test
     void toString_WhenCallMethod_ThatReturnIdTitleValues() {
-        Category categoryWithData = Category.builder()
-                .id(0)
-                .title("Home")
-                .build();
+        Category categoryWithData = new Category(0, "Home", mockTransactions());
 
-        assertThat(categoryWithData.toString()).isEqualTo("Category(id=0, title=Home)");
+        assertThat(categoryWithData.toString()).contains(
+            "id=0",
+            "title=Home"
+        );
     }
 
     @Test

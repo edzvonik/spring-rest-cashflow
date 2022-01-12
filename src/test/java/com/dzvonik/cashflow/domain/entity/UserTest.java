@@ -24,7 +24,6 @@ class UserTest {
     @Test
     void builder_WhenSetValues_ThatReturnValues() {
         List<Account> accounts = mockAccounts();
-
         User userWithData = User.builder()
                 .id(1)
                 .name("Test1")
@@ -49,7 +48,11 @@ class UserTest {
                 .baseCurrency("RUB")
                 .build();
 
-        assertThat(userWithData.toString()).isEqualTo("User(id=0, name=Test2, email=test@email.com)");
+        assertThat(userWithData.toString()).contains(
+            "id=0",
+            "name=Test2",
+            "email=test@email.com"
+        );
     }
 
     @Test

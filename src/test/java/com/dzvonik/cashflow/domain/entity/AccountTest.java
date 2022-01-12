@@ -53,7 +53,12 @@ class AccountTest {
                 .balance(new BigDecimal("0.00"))
                 .build();
 
-        assertThat(accountWithData.toString()).isEqualTo("Account(id=0, title=Card, currency=RUB, balance=0.00)");
+        assertThat(accountWithData.toString()).contains(
+            "id=0",
+            "title=Card",
+            "currency=RUB",
+            "balance=0.00"
+        );
     }
 
     @Test
@@ -63,11 +68,11 @@ class AccountTest {
                 .verify();
     }
 
-    private <T> List<T> mock(Class c) {
+    private <T> List<T> mock(Class<T> c) {
         Object mock1 = Mockito.mock(c);
         Object mock2 = Mockito.mock(c);
 
-        return (List<T>) List.of(mock1, mock2);
+        return List.of(c.cast(mock1), c.cast(mock2));
     }
 
 }

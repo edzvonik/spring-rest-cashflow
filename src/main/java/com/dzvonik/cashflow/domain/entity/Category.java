@@ -22,12 +22,11 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@Builder
 @EqualsAndHashCode(of = "id")
 @ToString(of = {"id", "title"})
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Category  {
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")

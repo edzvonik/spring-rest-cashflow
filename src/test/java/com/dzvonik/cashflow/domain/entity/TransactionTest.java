@@ -50,7 +50,12 @@ class TransactionTest {
                 .date(LocalDate.of(2022, 12, 5))
                 .build();
 
-        assertThat(transactionWithData.toString()).isEqualTo("Transaction(id=0, amount=555963.12, type=INCOME, date=2022-12-05)");
+        assertThat(transactionWithData.toString()).contains(
+            "id=0",
+            "amount=555963.12",
+            "type=INCOME",
+            "date=2022-12-05"
+        );
     }
 
     @Test
