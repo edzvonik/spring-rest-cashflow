@@ -3,7 +3,7 @@
 --changeset edzvonik:1
 
 -- users
-create sequence seq_user;
+create sequence seq_user start with 1 increment by 50;
 
 create table "user"
 (
@@ -14,7 +14,7 @@ create table "user"
 );
 
 -- accounts
-create sequence seq_account;
+create sequence seq_account start with 1 increment by 50;
 
 create table account
 (
@@ -30,7 +30,7 @@ create table account
 );
 
 -- categories
-create sequence seq_category;
+create sequence seq_category start with 1 increment by 50;
 
 create table category
 (
@@ -52,7 +52,7 @@ create table account_category
 );
 
 -- transactions
-create sequence seq_transaciton;
+create sequence seq_transaciton start with 1 increment by 50;
 
 create table transaction
 (

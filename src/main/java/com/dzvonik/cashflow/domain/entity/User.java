@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
+import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Builder
+@Table(name = "\"user\"")
 @EqualsAndHashCode(of = "id")
 @ToString(of = {"id", "name", "email"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
