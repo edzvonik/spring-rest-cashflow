@@ -52,7 +52,7 @@ create table account_category
 );
 
 -- transactions
-create sequence seq_transaciton start with 1 increment by 50;
+create sequence seq_transaction start with 1 increment by 50;
 
 create table transaction
 (
@@ -73,10 +73,6 @@ create table category_transaction
 (
     category_id bigint not null,
     transaction_id bigint not null,
-    constraint uc_transactions
-        unique (transaction_id),
-    constraint uc_category
-        unique (category_id),
     constraint fk_transaction
         foreign key (transaction_id)
             references transaction(id),
