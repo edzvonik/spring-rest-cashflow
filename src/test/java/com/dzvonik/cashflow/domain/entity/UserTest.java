@@ -22,14 +22,14 @@ class UserTest {
     void builder_WhenSetValues_ThanReturnValues() {
         List<Account> accounts = mock();
         User userWithData = User.builder()
-                .id(1)
+                .id(7L)
                 .name("Test1")
                 .email("test@email.com")
                 .baseCurrency("USD")
                 .accounts(accounts)
                 .build();
 
-        assertThat(userWithData.getId()).isEqualTo(1);
+        assertThat(userWithData.getId()).isEqualTo(7L);
         assertThat(userWithData.getName()).isEqualTo("Test1");
         assertThat(userWithData.getEmail()).isEqualTo("test@email.com");
         assertThat(userWithData.getBaseCurrency()).isEqualTo("USD");
@@ -39,7 +39,7 @@ class UserTest {
     @Test
     void toString_WhenCall_ThanReturnStringRepresentation() {
         User userWithData = User.builder()
-                .id(0)
+                .id(0L)
                 .name("Test2")
                 .email("test@email.com")
                 .baseCurrency("RUB")

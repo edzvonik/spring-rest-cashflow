@@ -25,7 +25,7 @@ class AccountTest {
         List<Category> categories = mock(Category.class);
 
         Account accountWithData = Account.builder()
-                .id(5)
+                .id(5L)
                 .title("Cash")
                 .currency("USD")
                 .balance(new BigDecimal("0.01"))
@@ -33,7 +33,7 @@ class AccountTest {
                 .transactions(transactions)
                 .build();
 
-        assertThat(accountWithData.getId()).isEqualTo(5);
+        assertThat(accountWithData.getId()).isEqualTo(5L);
         assertThat(accountWithData.getTitle()).isEqualTo("Cash");
         assertThat(accountWithData.getCurrency()).isEqualTo("USD");
         assertThat(accountWithData.getBalance()).isEqualTo(new BigDecimal("0.01"));
@@ -44,7 +44,7 @@ class AccountTest {
     @Test
     void toString_WhenCall_ThanReturnStringRepresentation() {
         Account accountWithData = Account.builder()
-                .id(0)
+                .id(0L)
                 .title("Card")
                 .currency("RUB")
                 .balance(new BigDecimal("0.00"))

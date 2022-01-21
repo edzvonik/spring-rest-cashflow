@@ -21,16 +21,16 @@ class CategoryTest {
     @Test
     void builder_WhenSetValues_ThanReturnValues() {
         List<Transaction> transactions = mock();
-        Category categoryWithData = new Category(3, "Home", transactions);
+        Category categoryWithData = new Category(3L, "Home", transactions);
 
-        assertThat(categoryWithData.getId()).isEqualTo(3);
+        assertThat(categoryWithData.getId()).isEqualTo(3L);
         assertThat(categoryWithData.getTitle()).isEqualTo("Home");
         assertThat(categoryWithData.getTransactions()).containsExactlyInAnyOrderElementsOf(transactions);
     }
 
     @Test
     void toString_WhenCall_ThanReturnStringRepresentation() {
-        Category categoryWithData = new Category(0, "Home", mock());
+        Category categoryWithData = new Category(0L, "Home", mock());
 
         assertThat(categoryWithData.toString()).contains(
             "id=0",

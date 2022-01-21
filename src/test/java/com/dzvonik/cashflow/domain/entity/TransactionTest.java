@@ -24,14 +24,14 @@ class TransactionTest {
     @Test
     void builder_WhenSetValues_ThanReturnValues() {
         Transaction transactionWithData = Transaction.builder()
-                .id(7)
+                .id(7L)
                 .amount(new BigDecimal("1023.56"))
                 .type(TransactionType.EXPENSE)
                 .date(LocalDate.of(2022, 1, 6))
                 .comment("Test!")
                 .build();
 
-        assertThat(transactionWithData.getId()).isEqualTo(7);
+        assertThat(transactionWithData.getId()).isEqualTo(7L);
         assertThat(transactionWithData.getAmount()).isEqualTo(new BigDecimal("1023.56"));
         assertThat(transactionWithData.getType()).isEqualTo(TransactionType.EXPENSE);
         assertThat(transactionWithData.getDate()).isEqualTo(LocalDate.of(2022, 1, 6));
@@ -41,7 +41,7 @@ class TransactionTest {
     @Test
     void toString_WhenCall_ThanReturnStringRepresentation() {
         Transaction transactionWithData = Transaction.builder()
-                .id(0)
+                .id(0L)
                 .amount(new BigDecimal("555963.12"))
                 .type(TransactionType.INCOME)
                 .date(LocalDate.of(2022, 12, 5))

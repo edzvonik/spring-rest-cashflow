@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
@@ -34,7 +36,7 @@ public class Account {
     @Id
     @SequenceGenerator(name = "seq_account", sequenceName = "seq_account")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_account")
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -46,6 +48,11 @@ public class Account {
     private BigDecimal balance;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "account_category",
+            joinColumns = { @JoinColumn(name = "account_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+    )
     private List<Category> categories;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

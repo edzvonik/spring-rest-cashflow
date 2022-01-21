@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
@@ -34,7 +35,7 @@ public class Transaction {
     @Id
     @SequenceGenerator(name = "seq_transaction", sequenceName = "seq_transaction")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_transaction")
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -47,6 +48,9 @@ public class Transaction {
     private LocalDate date;
 
     private String comment;
+
+//    @Column(nullable = false)
+//    private Long account_id;
 
 }
 
