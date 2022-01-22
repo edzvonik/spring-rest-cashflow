@@ -2,7 +2,6 @@
 
 --changeset edzvonik:1
 
--- users
 create sequence seq_user start with 1 increment by 50;
 
 create table "user"
@@ -13,7 +12,6 @@ create table "user"
     base_currency text not null
 );
 
--- accounts
 create sequence seq_account start with 1 increment by 50;
 
 create table account
@@ -29,7 +27,6 @@ create table account
             on delete cascade
 );
 
--- categories
 create sequence seq_category start with 1 increment by 50;
 
 create table category
@@ -51,7 +48,6 @@ create table account_category
             references category(id)
 );
 
--- transactions
 create sequence seq_transaction start with 1 increment by 50;
 
 create table transaction
@@ -68,7 +64,6 @@ create table transaction
             on delete cascade
 );
 
--- category_transaction
 create table category_transaction
 (
     category_id bigint not null,
@@ -80,4 +75,3 @@ create table category_transaction
         foreign key (category_id)
             references category(id)
 );
-

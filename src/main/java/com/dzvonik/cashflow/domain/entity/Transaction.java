@@ -48,10 +48,4 @@ public class Transaction {
 
     private String comment;
 
-    @Column(nullable = false)
-    private Long account_id;
-
-    private Long category_id;
-
 }
-
