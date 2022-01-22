@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
@@ -45,12 +46,8 @@ public class User {
     @Column(nullable = false)
     private String baseCurrency;
 
-    @OneToMany(
-            mappedBy = "user_id",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Account> accounts;
 
 }
-

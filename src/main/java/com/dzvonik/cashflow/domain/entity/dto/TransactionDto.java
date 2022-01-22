@@ -20,17 +20,16 @@ import javax.persistence.SequenceGenerator;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TransactionDto {
 
-    private Long id;
-
-    private BigDecimal amount;
-
-    private TransactionType type;
-
-    private LocalDate date;
-
-    private String comment;
+    private final Long id;
+    private final BigDecimal amount;
+    private final TransactionType type;
+    private final LocalDate date;
+    private final String comment;
 
 }
 

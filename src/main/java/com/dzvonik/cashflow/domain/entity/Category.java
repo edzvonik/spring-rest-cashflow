@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
@@ -34,7 +35,8 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "category_id", fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Transaction> transactions;
 
 }
