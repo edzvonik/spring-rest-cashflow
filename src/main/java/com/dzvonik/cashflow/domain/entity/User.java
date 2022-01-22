@@ -45,7 +45,11 @@ public class User {
     @Column(nullable = false)
     private String baseCurrency;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "user_id",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Account> accounts;
 
 }

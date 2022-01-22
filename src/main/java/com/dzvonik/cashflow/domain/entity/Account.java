@@ -55,8 +55,15 @@ public class Account {
     )
     private List<Category> categories;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "account_id",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Transaction> transactions;
+
+    private Long user_id;
 
 }
 

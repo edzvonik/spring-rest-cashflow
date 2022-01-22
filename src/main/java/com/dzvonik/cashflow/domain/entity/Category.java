@@ -34,7 +34,7 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category_id", fetch = FetchType.LAZY)
     private List<Transaction> transactions;
 
 }
