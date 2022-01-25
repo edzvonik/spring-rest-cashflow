@@ -19,7 +19,7 @@ class CategoryTest {
     }
 
     @Test
-    void builder_WhenSetValues_ThanReturnValues() {
+    void constructor_WhenSetValues_ThanReturnValues() {
         List<Transaction> transactions = mock();
         Category categoryWithData = new Category(3L, "Home", transactions);
 

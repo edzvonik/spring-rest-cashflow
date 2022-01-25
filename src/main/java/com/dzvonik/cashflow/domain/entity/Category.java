@@ -17,13 +17,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Getter
+@Setter
 @EqualsAndHashCode(of = "id")
 @ToString(of = {"id", "title"})
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 

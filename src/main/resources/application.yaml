@@ -12,6 +12,8 @@ spring:
     change-log: db/changelog/changelog-master.xml
     default-schema: public
     enabled: true
+  application:
+    name: Yoyo! It`s my first spring app with name
 
 server:
   port: 8080
