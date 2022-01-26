@@ -4,7 +4,6 @@ import com.dzvonik.cashflow.domain.entity.dto.AccountDto;
 import com.dzvonik.cashflow.domain.entity.mapper.AccountMapper;
 import com.dzvonik.cashflow.domain.entity.repository.AccountRepository;
 
-import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @NotNull
     @Override
     @Transactional
     public List<AccountDto> findAll() {
@@ -31,7 +29,6 @@ public class AccountServiceImpl implements AccountService {
                 .collect(Collectors.toList());
     }
 
-    @NotNull
     @Override
     @Transactional
     public AccountDto findById(Long id) {
