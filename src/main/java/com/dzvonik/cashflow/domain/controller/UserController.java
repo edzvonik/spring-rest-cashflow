@@ -19,8 +19,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("{userId}/getAllTransactions")
+    @GetMapping("/{userId}/getAllTransactions")
     public List<TransactionDto> getAllTransactions(@PathVariable("userId") Long id) {
-        return userService.getAllTransactionsById(id);
+        return userService.getAllTransactions(id);
+    }
+
+    @GetMapping("/{userId}/getAllAccounts")
+    public List<TransactionDto> getAllAccounts(@PathVariable("userId") Long id) {
+        return userService.getAllTransactions(id);
     }
 }
