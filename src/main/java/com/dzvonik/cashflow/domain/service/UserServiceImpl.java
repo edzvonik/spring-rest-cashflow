@@ -1,18 +1,11 @@
 package com.dzvonik.cashflow.domain.service;
 
-import com.dzvonik.cashflow.domain.entity.Account;
-import com.dzvonik.cashflow.domain.entity.Category;
-import com.dzvonik.cashflow.domain.entity.Transaction;
 import com.dzvonik.cashflow.domain.entity.User;
-import com.dzvonik.cashflow.domain.entity.dto.AccountDto;
+import com.dzvonik.cashflow.domain.entity.dto.AccountInfoDto;
+import com.dzvonik.cashflow.domain.entity.dto.CategoryInfoDto;
 import com.dzvonik.cashflow.domain.entity.dto.TransactionDto;
-import com.dzvonik.cashflow.domain.entity.mapper.AccountMapper;
-import com.dzvonik.cashflow.domain.entity.mapper.TransactionMapper;
-import com.dzvonik.cashflow.domain.entity.repository.AccountRepository;
-import com.dzvonik.cashflow.domain.entity.repository.CategoryRepository;
-import com.dzvonik.cashflow.domain.entity.repository.UserRepository.UserRepository;
+import com.dzvonik.cashflow.domain.entity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,50 +17,43 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
-    public List<TransactionDto> getAllTransactions(Long id) {
+    public List<TransactionDto> findAllTransactions(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id: " + id + " not found"));
 
-        User user = this.findById(id);
-        List<Account> accounts = user.getAccounts();
-        List<Category> categories = new java.util.ArrayList<>();
-
-        for (Account a : accounts) {
-            categories.addAll(a.getCategories());
-        }
-
-        List<Transaction> transactions = List.of();
-
-        for (Category c : categories) {
-            for (Transaction t : c.getTransactions()) {
-                transactions.add(t);
-            }
-        }
-
-        return transactions.stream().map(TransactionMapper.INSTANCE::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional
-    public List<Account> getAllAccounts(Long id) {
-        User user = findById(id);
-
-        return user.getAccounts();
-    }
-
-    @Override
-    public User findById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User with id=" + id + "not found"));
+        return user.getAccounts().stream()
+                .map(account -> {
+                    AccountInfoDto accountInfoDto = AccountInfoDto.builder()
+                            .id(account.getId())
+                            .title(account.getTitle())
+                            .build();
+                    return account.getCategories().stream()
+                            .map(category -> {
+                                CategoryInfoDto categoryInfoDto = CategoryInfoDto.builder()
+                                        .id(category.getId())
+                                        .title(category.getTitle())
+                                        .build();
+                                return category.getTransactions().stream()
+                                        .map(transaction -> TransactionDto.builder()
+                                                .id(transaction.getId())
+                                                .amount(transaction.getAmount())
+                                                .type(transaction.getType())
+                                                .date(transaction.getDate())
+                                                .comment(transaction.getComment())
+                                                .accountInfo(accountInfoDto)
+                                                .categoryInfo(categoryInfoDto)
+                                                .build())
+                                        .collect(Collectors.toList());
+                            })
+                            .flatMap(List::stream)
+                            .collect(Collectors.toList());
+                })
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
 }
