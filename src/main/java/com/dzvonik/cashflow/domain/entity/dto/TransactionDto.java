@@ -19,8 +19,8 @@ public class TransactionDto {
     private final TransactionType type;
     private final LocalDate date;
     private final String comment;
-    private final AccountInfoDto accountInfo;
-    private final CategoryInfoDto categoryInfo;
+    //private final AccountInfoDto accountInfo;
+    //private final CategoryInfoDto categoryInfo;
 
 }
 
