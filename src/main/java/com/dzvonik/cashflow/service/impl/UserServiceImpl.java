@@ -3,16 +3,16 @@ package com.dzvonik.cashflow.service.impl;
 import com.dzvonik.cashflow.domain.entity.User;
 import com.dzvonik.cashflow.domain.entity.repository.UserRepository;
 import com.dzvonik.cashflow.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public User findById(Long id) {

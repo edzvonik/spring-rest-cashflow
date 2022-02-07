@@ -6,7 +6,7 @@ import com.dzvonik.cashflow.domain.entity.User;
 import com.dzvonik.cashflow.domain.entity.dto.TransactionDto;
 import com.dzvonik.cashflow.service.TransactionService;
 import com.dzvonik.cashflow.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Override
     @Transactional
