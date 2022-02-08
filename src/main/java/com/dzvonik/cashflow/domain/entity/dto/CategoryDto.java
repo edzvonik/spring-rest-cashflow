@@ -1,14 +1,13 @@
 package com.dzvonik.cashflow.domain.entity.dto;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class CategoryDto {
 
-    private Long id;
+    private final Long id;
 
-    private String title;
-
-    private List<TransactionDto> transactions;
+    private final String title;
 
 }
 
