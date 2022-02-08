@@ -40,7 +40,9 @@ public class DefaultTransactionService implements TransactionService {
         return transactionDtos;
     }
 
-    private List<TransactionDto> getCommonTransactions(Account account, Map<Category, List<Transaction>> categoriesToTransactions, List<Transaction> accountTransactions) {
+    private List<TransactionDto> getCommonTransactions(Account account,
+                                                       Map<Category, List<Transaction>> categoriesToTransactions,
+                                                       List<Transaction> accountTransactions) {
         List<Transaction> commonTransactions = new ArrayList<>(accountTransactions);
         List<TransactionDto> result = new ArrayList<>();
         for (Map.Entry<Category, List<Transaction>> entry : categoriesToTransactions.entrySet()) {
