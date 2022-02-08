@@ -33,21 +33,25 @@ public class DefaultTransactionService implements TransactionService {
             Map<Category, List<Transaction>> categoriesToTransactions = account.getCategories().stream()
                     .collect(Collectors.toMap(Function.identity(), Category::getTransactions));
             List<Transaction> accountTransactions = account.getTransactions();
-            getCommonTransactions(transactionDtos, account, categoriesToTransactions, accountTransactions);
+            List<TransactionDto> accountCategoryCommonTransactions =
+                    getCommonTransactions(account, categoriesToTransactions, accountTransactions);
+            transactionDtos.addAll(accountCategoryCommonTransactions);
         }
         return transactionDtos;
     }
 
-    private void getCommonTransactions(List<TransactionDto> transactionDtos, Account account, Map<Category, List<Transaction>> categoriesToTransactions, List<Transaction> accountTransactions) {
+    private List<TransactionDto> getCommonTransactions(Account account, Map<Category, List<Transaction>> categoriesToTransactions, List<Transaction> accountTransactions) {
         List<Transaction> commonTransactions = new ArrayList<>(accountTransactions);
+        List<TransactionDto> result = new ArrayList<>();
         for (Map.Entry<Category, List<Transaction>> entry : categoriesToTransactions.entrySet()) {
             commonTransactions.retainAll(entry.getValue());
             Category category = entry.getKey();
             for (Transaction transaction : commonTransactions) {
                 TransactionDto transactionDto = buildTransaction(account, category, transaction);
-                transactionDtos.add(transactionDto);
+                result.add(transactionDto);
             }
         }
+        return result;
     }
 
     private TransactionDto buildTransaction(Account account, Category category, Transaction transaction) {
