@@ -19,7 +19,7 @@ public class TransactionController {
 
     @GetMapping(value = "/transactions")
     public List<TransactionDto> findAllTransactions(@PathVariable("userId") Long id) {
-        return transactionService.findAllTransactionsByUserId(id);
+        return transactionService.getAllTransactions();
     }
 
 }
