@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -28,7 +31,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @EqualsAndHashCode(of = "id")
-@ToString(of = {"id", "amount", "type", "date"})
+@ToString(exclude = {"account", "category"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Transaction {
@@ -50,9 +53,11 @@ public class Transaction {
 
     private String comment;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 

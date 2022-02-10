@@ -7,11 +7,13 @@ import com.dzvonik.cashflow.domain.entity.User;
 import com.dzvonik.cashflow.domain.entity.dto.AccountDto;
 import com.dzvonik.cashflow.domain.entity.dto.CategoryDto;
 import com.dzvonik.cashflow.domain.entity.dto.TransactionDto;
+import com.dzvonik.cashflow.domain.entity.repository.TransactionRepository;
 import com.dzvonik.cashflow.service.TransactionService;
 import com.dzvonik.cashflow.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +24,12 @@ public class DefaultTransactionService implements TransactionService {
 
     private final UserService userService;
 
+    private final TransactionRepository transactionRepository;
+
     @Override
     public List<TransactionDto> getAllTransactions() {
         User user = userService.getUser();
-        List<Transaction> transactions = user.getAccounts().stream()
-                .map(Account::getTransactions)
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
+        List<Transaction> transactions = transactionRepository.findAllByLastThreeMonthAndUser(user);
         List<TransactionDto> transactionDtos = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
