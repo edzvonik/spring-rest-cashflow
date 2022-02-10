@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
