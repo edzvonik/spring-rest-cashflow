@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,36 +25,21 @@ public class DefaultTransactionService implements TransactionService {
     @Override
     public List<TransactionDto> getAllTransactions() {
         User user = userService.getUser();
-        List<Account> accounts = user.getAccounts();
+        List<Transaction> transactions = user.getAccounts().stream()
+                .map(Account::getTransactions)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
         List<TransactionDto> transactionDtos = new ArrayList<>();
-        for (Account account : accounts) {
-            Map<Category, List<Transaction>> categoriesToTransactions = account.getCategories().stream()
-                    .collect(Collectors.toMap(Function.identity(), Category::getTransactions));
-            List<Transaction> accountTransactions = account.getTransactions();
-            List<TransactionDto> accountCategoryCommonTransactions =
-                    getCommonTransactions(account, categoriesToTransactions, accountTransactions);
-            transactionDtos.addAll(accountCategoryCommonTransactions);
+
+        for (Transaction transaction : transactions) {
+            TransactionDto transactionDto = buildTransactionDto(transaction.getAccount(), transaction.getCategory(), transaction);
+            transactionDtos.add(transactionDto);
         }
+
         return transactionDtos;
     }
 
-    private List<TransactionDto> getCommonTransactions(Account account,
-                                                       Map<Category, List<Transaction>> categoriesToTransactions,
-                                                       List<Transaction> accountTransactions) {
-        List<Transaction> commonTransactions = new ArrayList<>(accountTransactions);
-        List<TransactionDto> result = new ArrayList<>();
-        for (Map.Entry<Category, List<Transaction>> entry : categoriesToTransactions.entrySet()) {
-            commonTransactions.retainAll(entry.getValue());
-            Category category = entry.getKey();
-            for (Transaction transaction : commonTransactions) {
-                TransactionDto transactionDto = buildTransaction(account, category, transaction);
-                result.add(transactionDto);
-            }
-        }
-        return result;
-    }
-
-    private TransactionDto buildTransaction(Account account, Category category, Transaction transaction) {
+    private TransactionDto buildTransactionDto(Account account, Category category, Transaction transaction) {
         return TransactionDto.builder()
                             .id(transaction.getId())
                             .amount(transaction.getAmount())

@@ -56,7 +56,7 @@ public class Account {
     private List<Category> categories;
 
     @JoinColumn(name = "account_id")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
 }

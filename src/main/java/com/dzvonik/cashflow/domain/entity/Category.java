@@ -38,7 +38,7 @@ public class Category {
     private String title;
 
     @JoinColumn(name = "category_id")
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private List<Transaction> transactions;
 
 }
