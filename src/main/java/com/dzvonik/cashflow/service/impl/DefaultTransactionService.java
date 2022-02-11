@@ -13,6 +13,7 @@ import com.dzvonik.cashflow.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class DefaultTransactionService implements TransactionService {
     @Override
     public List<TransactionDto> getAllTransactions() {
         User user = userService.getUser();
-        List<Transaction> transactions = transactionRepository.findAllByLastThreeMonthAndUser(user);
+        List<Account> accounts = user.getAccounts();
+        LocalDate threeMonthAgo = LocalDate.of(2022, 06, 01).minusMonths(3);
+        List<Transaction> transactions = transactionRepository.findAllByAccountInAndDateAfter(accounts, threeMonthAgo);
         List<TransactionDto> transactionDtos = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
