@@ -8,7 +8,6 @@ import lombok.Getter;
 public class AccountDto {
 
     private final Long id;
-
     private final String title;
 
 }

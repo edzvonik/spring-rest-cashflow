@@ -22,7 +22,6 @@ import java.util.List;
 public class DefaultTransactionService implements TransactionService {
 
     private final UserService userService;
-
     private final TransactionRepository transactionRepository;
 
     @Override

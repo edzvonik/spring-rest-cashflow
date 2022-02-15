@@ -14,15 +14,10 @@ import java.time.LocalDate;
 public class TransactionDto {
 
     private final Long id;
-
     private final BigDecimal amount;
-
     private final LocalDate date;
-
     private final String comment;
-
     private final AccountDto account;
-
     private final CategoryDto category;
 
 }
