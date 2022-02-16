@@ -4,6 +4,6 @@ import com.dzvonik.cashflow.domain.entity.User;
 
 public interface UserService {
 
-    User getUser();
+    User getUser(Long id);
 
 }
