@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -27,10 +26,10 @@ public class DefaultTransactionService implements TransactionService {
 
     @Override
     public List<TransactionDto> getAllTransactions() {
-        User user = userService.getUser(1L);
+        User user = userService.getUser(4L);
         List<Account> accounts = user.getAccounts();
         LocalDate threeMonthAgo = LocalDate.now().minusMonths(3);
-        List<Transaction> transactions = transactionRepository.findAllByAccountInAndDateAfter(accounts, threeMonthAgo);
+        List<Transaction> transactions = transactionRepository.findAllByAccountInAndDateAfterOrderByDateDesc(accounts, threeMonthAgo);
         List<TransactionDto> transactionDtos = new ArrayList<>();
 
         for (Transaction transaction : transactions) {
@@ -43,15 +42,20 @@ public class DefaultTransactionService implements TransactionService {
 
     private TransactionDto buildTransactionDto(Transaction transaction) {
         Account account = transaction.getAccount();
-        Category category = Optional.of(transaction.getCategory()).orElse(null);
+        AccountDto accountDto = new AccountDto(account.getId(), account.getTitle());
+        Category category = transaction.getCategory();
+        CategoryDto categoryDto = null;
+        if (category != null) {
+            categoryDto = new CategoryDto(category.getId(), category.getTitle());
+        }
 
         return TransactionDto.builder()
                             .id(transaction.getId())
                             .amount(transaction.getAmount())
                             .date(transaction.getDate())
                             .comment(transaction.getComment())
-                            .account(new AccountDto(account.getId(), account.getTitle()))
-                            .category(new CategoryDto(category.getId(), category.getTitle()))
+                            .account(accountDto)
+                            .category(categoryDto)
                             .build();
     }
 
