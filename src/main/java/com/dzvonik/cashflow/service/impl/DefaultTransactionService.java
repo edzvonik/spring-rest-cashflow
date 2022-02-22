@@ -14,8 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,18 +26,12 @@ public class DefaultTransactionService implements TransactionService {
 
     @Override
     public List<TransactionDto> getAllTransactions() {
-        User user = userService.getUser(4L);
+        User user = userService.getUser();
         List<Account> accounts = user.getAccounts();
         LocalDate threeMonthAgo = LocalDate.now().minusMonths(3);
-        List<Transaction> transactions = transactionRepository.findAllByAccountInAndDateAfterOrderByDateDesc(accounts, threeMonthAgo);
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-
-        for (Transaction transaction : transactions) {
-            TransactionDto transactionDto = buildTransactionDto(transaction);
-            transactionDtos.add(transactionDto);
-        }
-
-        return transactionDtos;
+        return transactionRepository.findAllByAccountInAndDateAfterOrderByDateDesc(accounts, threeMonthAgo).stream()
+                .map(this::buildTransactionDto)
+                .collect(Collectors.toList());
     }
 
     private TransactionDto buildTransactionDto(Transaction transaction) {
@@ -50,13 +44,13 @@ public class DefaultTransactionService implements TransactionService {
         }
 
         return TransactionDto.builder()
-                            .id(transaction.getId())
-                            .amount(transaction.getAmount())
-                            .date(transaction.getDate())
-                            .comment(transaction.getComment())
-                            .account(accountDto)
-                            .category(categoryDto)
-                            .build();
+                .id(transaction.getId())
+                .amount(transaction.getAmount())
+                .date(transaction.getDate())
+                .comment(transaction.getComment())
+                .account(accountDto)
+                .category(categoryDto)
+                .build();
     }
 
 }

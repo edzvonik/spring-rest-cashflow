@@ -1,28 +1,26 @@
 package com.dzvonik.cashflow.domain.entity;
 
 import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
-
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+
 class TransactionTest {
 
     @Test
-    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThenNoExceptionThrown() {
         assertThatCode(() -> Transaction.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThanReturnValues() {
+    void builder_WhenSetValues_ThenReturnValues() {
         Transaction transactionWithData = Transaction.builder()
                 .id(7L)
                 .amount(new BigDecimal("1023.56"))
@@ -39,7 +37,7 @@ class TransactionTest {
     }
 
     @Test
-    void toString_WhenCall_ThanReturnStringRepresentation() {
+    void toString_WhenCall_ThenReturnStringRepresentation() {
         Transaction transactionWithData = Transaction.builder()
                 .id(0L)
                 .amount(new BigDecimal("555963.12"))

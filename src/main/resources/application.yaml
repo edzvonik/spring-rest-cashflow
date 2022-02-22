@@ -13,19 +13,8 @@ spring:
   liquibase:
     change-log: db/changelog/changelog-master.xml
     default-schema: public
-    enabled: true
   application:
-    name: Yoyo! It`s my first spring app with name
+    name: Cashflow
 
 server:
   port: 8080
-  servlet:
-    context-path: /api/v1
-  error:
-    include-message: always
-    include-binding-errors: always
-    include-stacktrace: on_param
-    include-exception: false
-#logging:
-#  file:
-#    name: log

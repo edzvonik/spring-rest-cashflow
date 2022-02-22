@@ -1,25 +1,24 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class CategoryTest {
 
     @Test
-    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThenNoExceptionThrown() {
         assertThatCode(() -> Category.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void constructor_WhenSetValues_ThanReturnValues() {
+    void constructor_WhenSetValues_ThenReturnValues() {
         List<Transaction> transactions = mock();
         Category categoryWithData = new Category(3L, "Home", transactions);
 
@@ -29,7 +28,7 @@ class CategoryTest {
     }
 
     @Test
-    void toString_WhenCall_ThanReturnStringRepresentation() {
+    void toString_WhenCall_ThenReturnStringRepresentation() {
         Category categoryWithData = new Category(0L, "Home", mock());
 
         assertThat(categoryWithData.toString()).contains(

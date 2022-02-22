@@ -1,25 +1,24 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class UserTest {
 
     @Test
-    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThenNoExceptionThrown() {
         assertThatCode(() -> User.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThanReturnValues() {
+    void builder_WhenSetValues_ThenReturnValues() {
         List<Account> accounts = mock();
         User userWithData = User.builder()
                 .id(7L)
@@ -37,7 +36,7 @@ class UserTest {
     }
 
     @Test
-    void toString_WhenCall_ThanReturnStringRepresentation() {
+    void toString_WhenCall_ThenReturnStringRepresentation() {
         User userWithData = User.builder()
                 .id(0L)
                 .name("Test2")

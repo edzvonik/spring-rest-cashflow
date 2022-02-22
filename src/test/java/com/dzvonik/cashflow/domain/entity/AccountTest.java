@@ -1,26 +1,25 @@
 package com.dzvonik.cashflow.domain.entity;
 
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+
 class AccountTest {
 
     @Test
-    void defaultConstructor_WhenCreatedWithReflection_ThanNoExceptionThrown() {
+    void defaultConstructor_WhenCreatedWithReflection_ThenNoExceptionThrown() {
         assertThatCode(() -> Account.class.getDeclaredConstructor().newInstance())
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void builder_WhenSetValues_ThanReturnValues() {
+    void builder_WhenSetValues_ThenReturnValues() {
         List<Transaction> transactions = mock(Transaction.class);
         List<Category> categories = mock(Category.class);
 
@@ -42,7 +41,7 @@ class AccountTest {
     }
 
     @Test
-    void toString_WhenCall_ThanReturnStringRepresentation() {
+    void toString_WhenCall_ThenReturnStringRepresentation() {
         Account accountWithData = Account.builder()
                 .id(0L)
                 .title("Card")

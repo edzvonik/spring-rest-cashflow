@@ -14,7 +14,9 @@ public class DefaultUserService implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User getUser(Long id) {
+    public User getUser() {
+        Long id = 1L;
+
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id: " + id + " - not found"));
     }
