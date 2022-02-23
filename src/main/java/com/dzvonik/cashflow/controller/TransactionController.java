@@ -15,7 +15,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @GetMapping("/api/v1/transactions")
-    public List<TransactionDto> findAllTransactions() {
+    public List<TransactionDto> getAllTransactions() {
         return transactionService.getAllTransactions();
     }
 
