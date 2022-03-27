@@ -28,8 +28,8 @@ public class DefaultTransactionService implements TransactionService {
     public List<TransactionDto> getAllTransactions() {
         User user = userService.getUser();
         List<Account> accounts = user.getAccounts();
-        LocalDate threeMonthAgo = LocalDate.now().minusMonths(3);
-        return transactionRepository.findAllByAccountInAndDateAfterOrderByDateDesc(accounts, threeMonthAgo).stream()
+
+        return transactionRepository.findAllByAccountInAndDateAfterOrderByDateDesc(accounts, LocalDate.now()).stream()
                 .map(this::buildTransactionDto)
                 .collect(Collectors.toList());
     }
