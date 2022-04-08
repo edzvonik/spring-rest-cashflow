@@ -46,10 +46,10 @@ class TransactionTest {
                 .build();
 
         assertThat(transactionWithData.toString()).contains(
-            "id=0",
-            "amount=555963.12",
-            "type=INCOME",
-            "date=2022-12-05"
+                "id=0",
+                "amount=555963.12",
+                "type=INCOME",
+                "date=2022-12-05"
         );
     }
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TransactionService {
 
+    TransactionDto getTransaction(Long id);
+
     List<TransactionDto> getAllTransactions();
 
 }

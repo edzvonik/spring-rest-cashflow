@@ -8,6 +8,7 @@ import com.dzvonik.cashflow.domain.entity.dto.AccountDto;
 import com.dzvonik.cashflow.domain.entity.dto.CategoryDto;
 import com.dzvonik.cashflow.domain.entity.dto.TransactionDto;
 import com.dzvonik.cashflow.domain.entity.repository.TransactionRepository;
+import com.dzvonik.cashflow.exception.ResourceNotFoundException;
 import com.dzvonik.cashflow.service.TransactionService;
 import com.dzvonik.cashflow.service.UserService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,11 @@ public class DefaultTransactionService implements TransactionService {
 
     private final UserService userService;
     private final TransactionRepository transactionRepository;
+
+    public TransactionDto getTransaction(Long id) {
+        Transaction transaction = transactionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Transaction with id: " + id + " not found"));
+        return buildTransactionDto(transaction);
+    }
 
     @Override
     public List<TransactionDto> getAllTransactions() {

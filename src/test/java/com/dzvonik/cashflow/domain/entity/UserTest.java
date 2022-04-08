@@ -45,9 +45,9 @@ class UserTest {
                 .build();
 
         assertThat(userWithData.toString()).contains(
-            "id=0",
-            "name=Test2",
-            "email=test@email.com"
+                "id=0",
+                "name=Test2",
+                "email=test@email.com"
         );
     }
 

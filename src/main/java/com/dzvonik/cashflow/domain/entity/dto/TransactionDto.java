@@ -1,5 +1,6 @@
 package com.dzvonik.cashflow.domain.entity.dto;
 
+import com.dzvonik.cashflow.domain.entity.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class TransactionDto {
 
     private final Long id;
     private final BigDecimal amount;
+    private final TransactionType type;
     private final LocalDate date;
     private final String comment;
     private final AccountDto account;
