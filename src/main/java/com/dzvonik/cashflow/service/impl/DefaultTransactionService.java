@@ -52,6 +52,7 @@ public class DefaultTransactionService implements TransactionService {
         return TransactionDto.builder()
                 .id(transaction.getId())
                 .amount(transaction.getAmount())
+                .type(transaction.getType())
                 .date(transaction.getDate())
                 .comment(transaction.getComment())
                 .account(accountDto)
